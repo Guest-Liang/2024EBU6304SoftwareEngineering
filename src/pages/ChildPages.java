@@ -6,9 +6,7 @@ import com.alibaba.fastjson.*;
 import java.awt.*;
 import java.awt.event.*;
 
-import components.BackgroundImagePanel;
-import components.Tools;
-import components.UserSession;
+import components.*;
 
 /**
  * The ChildPages class provides a panel for the child user to choose an item.
@@ -23,7 +21,7 @@ public class ChildPages extends JPanel {
     private JButton btnSavingGoal;
     private JButton btnWithdraw;
     private JButton btnDeposit;
-    private JButton btnReturn;
+    private JButton btnExit;
 
     public ChildPages() {
         setLayout(new BorderLayout());
@@ -60,12 +58,16 @@ public class ChildPages extends JPanel {
         gbc.gridy = 1;
         bgPanel.add(btnDeposit, gbc);
 
-        btnReturn = Tools.ExitButton();
+        JButton btnBack = Tools.BackButton(this,new LoginWindow());
         gbc.gridx = 0;
         gbc.gridy = 2;
+        bgPanel.add(btnBack, gbc);
+        
+        btnExit = Tools.ExitButton();
+        gbc.gridx = 1;
+        gbc.gridy = 2;
         gbc.gridwidth = 1;
-        bgPanel.add(btnReturn, gbc);
-
+        bgPanel.add(btnExit, gbc);
 
         btnShowBalance.addActionListener(new ActionListener()
         {
@@ -73,7 +75,53 @@ public class ChildPages extends JPanel {
             public void actionPerformed(ActionEvent e)
             {
                 JSONObject CU = UserSession.getInstance().getCurrentUser();
-                JOptionPane.showMessageDialog(null, "your balance is " + CU.getString("balance"));
+                JOptionPane.showMessageDialog(null, "Your balance is " + CU.getString("balance"));
+            }
+        });
+
+        btnSavingGoal.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                Tools.RefreshPages(new SavingGoalPages(), getParent());
+            }
+        });
+
+        btnWithdraw.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                JSONObject CU = UserSession.getInstance().getCurrentUser();
+                String balance = CU.getString("balance");
+                JOptionPane.showMessageDialog(null, "Your balance is " + balance);
+                while(true){
+                    String input = JOptionPane.showInputDialog("Please enter the amount you want to withdraw");
+                    if (input == null) { break; } // User clicked the cancel button
+                    try {
+                        int amount = Integer.parseInt(input);
+                        if (amount > Integer.parseInt(balance)) {
+                            JOptionPane.showMessageDialog(null, "You don't have enough balance");
+                            return;
+                        }
+                        CU.put("balance", Integer.parseInt(balance) - amount);
+                        JOptionPane.showMessageDialog(null, "Withdrawal successful");
+                        break;
+                    } catch (NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(null, "Invalid input. Please enter a valid amount.");
+                    }
+                }
+                Tools.SaveUserInfo();
+            }
+        });
+
+        btnDeposit.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                Tools.RefreshPages(new DepositPages(), getParent());
             }
         });
     }

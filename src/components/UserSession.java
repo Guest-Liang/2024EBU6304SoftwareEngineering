@@ -6,6 +6,7 @@ public class UserSession {
     private static UserSession instance;
     private JSONObject currentUser;
     private JSONArray currentInfo;
+    private JSONArray currentTask;
 
     private UserSession() {}
 
@@ -30,5 +31,13 @@ public class UserSession {
 
     public JSONArray getCurrentInfo() {
         return currentInfo;
+    }
+
+    public void setCurrentTask(JSONArray currentTask) {
+        this.currentTask = currentTask;
+    }
+
+    public JSONArray getCurrentTask() {
+        return currentTask;
     }
 }

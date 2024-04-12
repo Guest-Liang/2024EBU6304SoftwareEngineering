@@ -3,9 +3,7 @@ package pages;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import components.BackgroundImagePanel;
-import components.Tools;
-import components.UserSession;
+import components.*;
 
 import com.alibaba.fastjson.*;
 
@@ -21,6 +19,7 @@ public class RegisterPages extends JPanel {
     private JTextField nameField;
     private JPasswordField passwordField;
     private JComboBox<String> accountTypeBox;
+    private JComboBox<String> parentBox;
 
     /**
      * The constructor of the RegisterPages class.
@@ -74,9 +73,20 @@ public class RegisterPages extends JPanel {
         gbc.gridx = 1;
         bgPanel.add(accountTypeBox, gbc);
 
-        JButton btnReturn = Tools.ExitButton();
+        JLabel parentLabel = new JLabel("Parent:");
+        Tools.setLabelProperties(parentLabel);
         gbc.gridx = 0;
         gbc.gridy = 3;
+        bgPanel.add(parentLabel, gbc);
+
+        String[] parentLabels = {"True", "False"};
+        parentBox = new JComboBox<>(parentLabels);
+        gbc.gridx = 1;
+        bgPanel.add(parentBox, gbc);
+
+        JButton btnReturn = Tools.ExitButton();
+        gbc.gridx = 0;
+        gbc.gridy = 4;
         gbc.gridwidth = 1;
         bgPanel.add(btnReturn, gbc);
 
@@ -95,25 +105,29 @@ public class RegisterPages extends JPanel {
                     user.put("password", new String(passwordField.getPassword()));
                     user.put("accountType", (String) accountTypeBox.getSelectedItem());
                     user.put("balance", 0);
+                    user.put("isParent", parentBox.getSelectedIndex() == 0);
                     UserSession.getInstance().getCurrentInfo().add(user);
-                    try
-                    {
-                        Tools.WriteToFile("data/user.json", UserSession.getInstance().getCurrentInfo());
-                    }
-                    catch (Exception ex)
-                    {
-                        ex.printStackTrace();
-                    }
+                    Tools.SaveUserInfo();
                     nameField.setText("");
                     passwordField.setText("");
-                    JOptionPane.showMessageDialog(null, "Register successful.\nInfo has saved.");
-                    // System.out.println(UserSession.getInstance().getCurrentInfo());
                 }
             }
         });
 
+        JButton btnBack = Tools.BackButton(this, new LoginWindow());
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        gbc.gridwidth = 2;
+        bgPanel.add(btnBack, gbc);
     }
 
+    /**
+     * Check if the user input is valid for registration.
+     * @param nameField
+     * @param passwordField
+     * @param accountTypeBox
+     * @return
+     */
     public static boolean CheckRegister(JTextField nameField, JPasswordField passwordField, JComboBox<String> accountTypeBox) {
         String username = nameField.getText();
         String password = new String(passwordField.getPassword());
@@ -140,6 +154,11 @@ public class RegisterPages extends JPanel {
         return true;
     }
 
+    /**
+     * Check if the username already exists.
+     * @param username
+     * @return
+     */
     public static boolean usernameExists(String username) {
         JSONArray currentInfo = UserSession.getInstance().getCurrentInfo();
         for (int i = 0; i < currentInfo.size(); i++) {

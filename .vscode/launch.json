@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "main",
+            "request": "launch",
+            "mainClass": "main",
+            "projectName": "childBank_9556e5c3"
+        },
+        {
+            "type": "java",
             "name": "LoginWindow",
             "request": "launch",
             "mainClass": "pages.LoginWindow",

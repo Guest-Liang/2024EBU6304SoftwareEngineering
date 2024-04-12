@@ -46,6 +46,11 @@ public class Tools {
         label.setBackground(background);
     }
 
+    /**
+     * refesh the page
+     * @param newPage
+     * @param container
+     */
     public static void RefreshPages(JPanel newPage, Container container)
     {
         container.removeAll();
@@ -73,8 +78,111 @@ public class Tools {
         return btnReturn;
     }
 
+    /**
+     * Create a button that returns to the previous page when clicked.
+     * Description:
+     * This method creates a button that returns to the previous page when clicked.
+     * @param container
+     * @param newPage
+     * @return
+     */
+    public static JButton BackButton(Container container, JPanel newPage) {
+        JButton btnReturn = new JButton("Back");
+        btnReturn.setHorizontalAlignment(SwingConstants.CENTER);
+        btnReturn.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                RefreshPages(newPage, container);
+            }
+        });
+        return btnReturn;
+    }
+
+    /**
+     * Read data from a file and return it as a JSONArray.
+     * @param filePath
+     * @param jsonArray
+     * @throws IOException
+     */
     public static void WriteToFile(String filePath, JSONArray jsonArray) throws IOException {
         String jsonString = JSON.toJSONString(jsonArray, SerializerFeature.PrettyFormat);
         Files.write(Paths.get(filePath), jsonString.getBytes());
     }
+
+    /**
+     * Saves the current user's information to a file.
+     * This method finds the current user in the currentInfo array and replaces it with the updated user information.
+     * It then writes the updated currentInfo array back to the file.
+     * If the write operation is successful, a success message is displayed.
+     * If the write operation fails, an error message is displayed and the exception is printed to the console.
+     *
+     * @throws IOException if an I/O error occurs when writing to the file
+     */
+    public static void SaveUserInfo() {
+        // Find the index of currentUser in currentInfo and replace it
+        JSONArray currentInfo = UserSession.getInstance().getCurrentInfo();
+        JSONObject currentUser = UserSession.getInstance().getCurrentUser();
+        for (int i = 0; i < currentInfo.size(); i++) {
+            JSONObject user = currentInfo.getJSONObject(i);
+            if (user.getString("username").equals(currentUser.getString("username"))) {
+                currentInfo.set(i, currentUser);
+                break;
+            }
+        }
+
+        // Write currentInfo to file
+        try {
+            WriteToFile("data/user.json", currentInfo);
+            JOptionPane.showMessageDialog(null, "Success. UserInfo has saved.");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "write to file failed!");
+        }
+    }
+
+    /**
+     * Read data from a file and return it as a JSONArray.
+     * @param filePath
+     * @return
+     */
+    public static JSONArray ReadFromFile(String filePath) {
+        try {
+            String jsonString = Files.readString(Paths.get(filePath));
+            return JSON.parseArray(jsonString);
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "read from file failed!");
+            return new JSONArray();
+        }
+    }
+
+    /**
+     * Saves the current task information to a file.
+     * This method writes the currentTask array to the file.
+     * If the write operation is successful, a success message is displayed.
+     * If the write operation fails, an error message is displayed and the exception is printed to the console.
+     * @throws IOException if an I/O error occurs when writing to the file
+     */
+    public static void SaveTaskInfo() {
+        JSONArray currentTask = UserSession.getInstance().getCurrentTask();
+        try {
+            WriteToFile("data/task.json", currentTask);
+            JOptionPane.showMessageDialog(null, "Success. TaskInfo has saved.");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "write to file failed!");
+        }
+    }
+
+    /**
+     * Get the current time in the format "yyyy-MM-dd HH:mm:ss".
+     * @param void
+     * @return String
+     */
+    public static String getCurrentTime() {
+        return new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date());
+    }
+
 }
