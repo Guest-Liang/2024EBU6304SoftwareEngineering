@@ -1,0 +1,34 @@
+package components;
+
+import com.alibaba.fastjson.*;
+
+public class UserSession {
+    private static UserSession instance;
+    private JSONObject currentUser;
+    private JSONArray currentInfo;
+
+    private UserSession() {}
+
+    public static UserSession getInstance() {
+        if (instance == null) {
+            instance = new UserSession();
+        }
+        return instance;
+    }
+
+    public void setCurrentUser(JSONObject currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public JSONObject getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentInfo(JSONArray currentInfo) {
+        this.currentInfo = currentInfo;
+    }
+
+    public JSONArray getCurrentInfo() {
+        return currentInfo;
+    }
+}

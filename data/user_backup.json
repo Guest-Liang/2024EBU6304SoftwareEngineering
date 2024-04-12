@@ -1,0 +1,32 @@
+[
+    {
+        "password": "pass1",
+        "balance": 1000,
+        "accountType": "current",
+        "username": "user1"
+    },
+    {
+        "password": "pass2",
+        "balance": 2000,
+        "accountType": "current",
+        "username": "user2"
+    },
+    {
+        "password": "3",
+        "balance": 3000,
+        "accountType": "saving",
+        "username": "3"
+    },
+    {
+        "password": "12",
+        "balance": 0,
+        "accountType": "saving",
+        "username": "4"
+    },
+    {
+        "password": "4",
+        "balance": 0,
+        "accountType": "current",
+        "username": "5"
+    }
+]

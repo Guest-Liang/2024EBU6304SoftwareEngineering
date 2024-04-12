@@ -1,0 +1,170 @@
+package pages;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import com.alibaba.fastjson.*;
+import javax.swing.*;
+import java.util.*;
+
+import components.Dialogbox;
+import components.BackgroundImagePanel;
+import components.Tools;
+import components.UserSession;
+
+/**
+ * The LoginWindow class provides a panel for the user to login.
+ * Title : LoginWindow.java
+ * Description:
+ * The class provides a panel for the user to login.
+ * @author Liang Zheyu
+ * @version 0.1.0
+ */
+public class LoginWindow extends JFrame implements ActionListener {
+    private JLabel lblUsername;
+    private JTextField txtUsername;
+    private JLabel lblPassword;
+    private JPasswordField txtPassword;
+    private JButton btnLogin;
+    private JButton btnRegister;
+    JSONObject CurrentUser = new JSONObject();
+
+    /**
+     * The constructor of the LoginWindow class.
+     * It creates a panel for the user to login.
+     * @param void
+     * @return void
+     * @throws IOException
+     * @throws JSONException
+     */
+    public LoginWindow() {
+        super("Welcome to ChildBank");
+        setSize(640, 480);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        setLayout(new BorderLayout());
+        BackgroundImagePanel bgPanel = new BackgroundImagePanel("data/bg.jpg");
+        bgPanel.setLayout(new GridBagLayout());
+        add(bgPanel, BorderLayout.CENTER);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(4, 4, 4, 4); // Sets the spacing between components
+        
+        Font font = new Font("Arial", Font.PLAIN, 20); // Sets the font of the components
+
+        // Create the components
+        lblUsername = new JLabel("username:");
+        Tools.setLabelProperties(lblUsername);
+        txtUsername = new JTextField(20);
+        txtUsername.setFont(font);
+        txtUsername.setPreferredSize(new Dimension(200, 30));
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        bgPanel.add(lblUsername, gbc);
+        gbc.gridx = 1;
+        bgPanel.add(txtUsername, gbc);
+
+        lblPassword = new JLabel("password:");
+        Tools.setLabelProperties(lblPassword);
+        txtPassword = new JPasswordField(20);
+        txtPassword.setFont(font);
+        txtPassword.setPreferredSize(new Dimension(200, 30));
+        txtPassword.setEchoChar('*');
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        bgPanel.add(lblPassword, gbc);
+        gbc.gridx = 1;
+        bgPanel.add(txtPassword, gbc);
+
+        btnRegister = new JButton("Register");
+        btnRegister.setFont(font);
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridwidth = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        bgPanel.add(btnRegister, gbc);
+        btnRegister.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Tools.RefreshPages(new RegisterPages(), getContentPane());
+            }
+        });
+
+        btnLogin = new JButton("Login");
+        btnLogin.setFont(font);
+        btnLogin.addActionListener(this);
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        gbc.gridwidth = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        bgPanel.add(btnLogin, gbc);
+
+        setVisible(true);
+        requestFocus();
+        
+        String content = "";
+        try { content = new String(Files.readAllBytes(Paths.get("data/user.json"))); } 
+        catch (IOException e) { 
+            e.printStackTrace();
+            new Dialogbox("Error", "Cannot read user data file");
+            System.exit(1);
+        }
+        JSONArray jsonArray = JSONArray.parseArray(content);
+        UserSession.getInstance().setCurrentInfo(jsonArray);
+    }
+
+    /**
+     * The actionPerformed method is called when the user clicks the login button.
+     * It reads the user data from the file and compares the input with the data.
+     * @param ActionEvent ae
+     * @return void
+     * @throws IOException
+     * @throws JSONException
+     */
+    public void actionPerformed(ActionEvent ae)
+    {
+        String username = txtUsername.getText();
+        char[] passwordChars = txtPassword.getPassword();
+        String password = new String(passwordChars);
+        Arrays.fill(passwordChars, '0');
+        JSONArray jsonArray= UserSession.getInstance().getCurrentInfo();
+        // System.out.println(jsonArray);
+        boolean loginSuccess = false;
+        
+        for (int i = 0; i < jsonArray.size(); i++)
+        {
+            JSONObject userJson = jsonArray.getJSONObject(i);
+            String correctUsername = userJson.getString("username");
+            String correctPassword = userJson.getString("password");
+    
+            if (username.equals(correctUsername) && password.equals(correctPassword))
+            {
+                loginSuccess = true;
+                UserSession.getInstance().setCurrentUser(userJson);
+                break;
+            }
+        }
+
+        if (loginSuccess)
+        { 
+            new Dialogbox("Login Result", "login success!"); 
+            Tools.RefreshPages(new ChildPages(), getContentPane());
+        } else { 
+            new Dialogbox("Login Result", "login fail!"); 
+        }
+
+    }
+
+    /**
+     * The main method creates a new LoginWindow object.
+     * @param String[] args
+     * @return void
+     */
+    public static void main(String[] args)
+    {
+        new LoginWindow();
+    }
+}

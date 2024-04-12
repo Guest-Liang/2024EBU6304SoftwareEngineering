@@ -8,6 +8,13 @@
             "type": "java",
             "name": "LoginWindow",
             "request": "launch",
+            "mainClass": "pages.LoginWindow",
+            "projectName": "childBank_9556e5c3"
+        },
+        {
+            "type": "java",
+            "name": "LoginWindow",
+            "request": "launch",
             "mainClass": "LoginWindow",
             "projectName": "childBank_9556e5c3"
         },
