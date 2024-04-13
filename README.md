@@ -1,3 +1,5 @@
+## GuestLiang’s coding time: [![wakatime](https://wakatime.com/badge/user/0985cb7f-21b8-4ea5-86a4-5e6ba93cb575/project/018ece31-86b2-4427-922b-0c02f2d86060.svg)](https://wakatime.com/badge/user/0985cb7f-21b8-4ea5-86a4-5e6ba93cb575/project/018ece31-86b2-4427-922b-0c02f2d86060)
+
 ## 使用方法
 git clone 整个项目到本地，然后在ChildBank文件夹下执行   
 ```java
