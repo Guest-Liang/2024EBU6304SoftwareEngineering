@@ -1,7 +1,7 @@
 import javax.swing.*;
 import pages.*;
 
-public class main{
+public class Main {
 	public static void main(String[] args) {
         JFrame frame = new JFrame("Welcome to ChildBank");
         frame.setSize(960,540);

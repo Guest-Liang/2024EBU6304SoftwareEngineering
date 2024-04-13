@@ -1,18 +1,20 @@
-## Getting Started
+## 使用方法
+git clone 整个项目到本地，然后在ChildBank文件夹下执行   
+```java
+java -cp childBank.jar Main
+```
+我使用的java版本是   
+```
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+java 21 2023-09-19 LTS
+Java(TM) SE Runtime Environment (build 21+35-LTS-2513)
+Java HotSpot(TM) 64-Bit Server VM (build 21+35-LTS-2513, mixed mode, sharing)
+```
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+## 数据
+数据存储在data文件夹下，后缀copy是备份，建议不动   
+task和user以json格式存储   
 
-## Folder Structure
-
-The workspace contains two folders by default, where:
-
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+## 进度
+基本完成child页面，使用user里的child账户(isParent=false)登录可以进行操作   
+parent页面还未完成，使用user里的parent账户(isParent=true)登录是只有背景图   
