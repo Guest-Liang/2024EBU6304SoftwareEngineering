@@ -100,12 +100,15 @@ public class RegisterPages extends JPanel {
             {
                 if (CheckRegister(nameField, passwordField, accountTypeBox))
                 {
-                    JSONObject user = new JSONObject();
-                    user.put("username", nameField.getText());
-                    user.put("password", new String(passwordField.getPassword()));
-                    user.put("accountType", (String) accountTypeBox.getSelectedItem());
-                    user.put("balance", 0);
-                    user.put("isParent", parentBox.getSelectedIndex() == 0);
+                    User usertemp = new User();
+                    usertemp.setUsername(nameField.getText());
+                    usertemp.setPassword(new String(passwordField.getPassword()));
+                    usertemp.setAccountType((String) accountTypeBox.getSelectedItem());
+                    usertemp.setBalance(0);
+                    usertemp.setParent(parentBox.getSelectedIndex() == 0);
+                    usertemp.setSavingGoals(0);
+                    
+                    JSONObject user = User.UserData2Json(usertemp);
                     UserSession.getInstance().getCurrentInfo().add(user);
                     Tools.SaveUserInfo();
                     nameField.setText("");

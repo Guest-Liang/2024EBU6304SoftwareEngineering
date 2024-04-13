@@ -121,7 +121,23 @@ public class Tools {
      * @throws IOException if an I/O error occurs when writing to the file
      */
     public static void SaveUserInfo() {
-        // Find the index of currentUser in currentInfo and replace it
+        JSONArray currentInfo = UserSession.getInstance().getCurrentInfo();
+        try {
+            WriteToFile("data/user.json", currentInfo);
+            JOptionPane.showMessageDialog(null, "Success. UserInfo has saved.");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "write to file failed!");
+        }
+    }
+
+    /**
+     * Save the current user's information to the current user in the currentInfo array.
+     * This method finds the current user in the currentInfo array and replaces it with the updated user information.
+     * @param void
+     * @return void
+     */
+    public static void SaveCU2CI() {
         JSONArray currentInfo = UserSession.getInstance().getCurrentInfo();
         JSONObject currentUser = UserSession.getInstance().getCurrentUser();
         for (int i = 0; i < currentInfo.size(); i++) {
@@ -130,15 +146,6 @@ public class Tools {
                 currentInfo.set(i, currentUser);
                 break;
             }
-        }
-
-        // Write currentInfo to file
-        try {
-            WriteToFile("data/user.json", currentInfo);
-            JOptionPane.showMessageDialog(null, "Success. UserInfo has saved.");
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "write to file failed!");
         }
     }
 
@@ -185,4 +192,21 @@ public class Tools {
         return new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date());
     }
 
+    /**
+     * Saves the current transaction information to a file.
+     * This method writes the currentTransaction array to the file.
+     * If the write operation is successful, a success message is displayed.
+     * If the write operation fails, an error message is displayed and the exception is printed to the console.
+     * @throws IOException if an I/O error occurs when writing to the file
+     */
+    public static void SaveTransactionInfo() {
+        JSONArray currentTransaction = UserSession.getInstance().getCurrentTransaction();
+        try {
+            WriteToFile("data/transaction.json", currentTransaction);
+            JOptionPane.showMessageDialog(null, "Success. TransactionInfo has saved.");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "write to file failed!");
+        }
+    }
 }

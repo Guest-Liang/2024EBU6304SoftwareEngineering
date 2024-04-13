@@ -75,6 +75,8 @@ public class SavingGoalPages extends JPanel{
                         JOptionPane.showMessageDialog(null, "Invalid input. Please enter a valid goal.");
                     }
                 }
+                UserSession.getInstance().setCurrentUser(currentUser);
+                Tools.SaveCU2CI();
                 Tools.SaveUserInfo();
             }
         });

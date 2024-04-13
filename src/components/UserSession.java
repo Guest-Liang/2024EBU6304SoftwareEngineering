@@ -7,6 +7,7 @@ public class UserSession {
     private JSONObject currentUser;
     private JSONArray currentInfo;
     private JSONArray currentTask;
+    private JSONArray currentTransaction;
 
     private UserSession() {}
 
@@ -39,5 +40,13 @@ public class UserSession {
 
     public JSONArray getCurrentTask() {
         return currentTask;
+    }
+
+    public void setCurrentTransaction(JSONArray currentTransaction) {
+        this.currentTransaction = currentTransaction;
+    }
+
+    public JSONArray getCurrentTransaction() {
+        return currentTransaction;
     }
 }

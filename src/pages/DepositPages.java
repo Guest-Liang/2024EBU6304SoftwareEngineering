@@ -9,6 +9,14 @@ import java.awt.event.*;
 import components.*;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * The DepositPages class provides a panel for the user to deposit money.
+ * Title : DepositPages.java
+ * Description:
+ * The class provides a panel for the user to deposit money.
+ * @author Liang Zheyu
+ * @version 0.0.1
+ */
 public class DepositPages extends JPanel {
     public DepositPages() {
         setLayout(new BorderLayout());
@@ -16,18 +24,17 @@ public class DepositPages extends JPanel {
         bgPanel.setLayout(new GridBagLayout());
         add(bgPanel, BorderLayout.CENTER);
 
-        // Read data from task.json
-        JSONArray taskData = Tools.ReadFromFile("data/task.json");
+        JSONArray taskData = UserSession.getInstance().getCurrentTask();
 
         // Create column names
-        String[] columnNames = {"taskname", "taskid", "taskfinished", "tasksettime", "taskhandletime" ,"taskpay", "tasksetter", "taskhandler"};
+        String[] columnNames = {"Id", "taskName", "Finished", "SetTime", "HandleTime" ,"Pay", "Setter", "Handler"};
 
         Object[][] data = TaskDatatoTable(taskData, columnNames);
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
         JTable table = new JTable(model) {
             @Override
             public Class<?> getColumnClass(int column) {
-                // use checkbox for the "taskfinished" column
+                // use checkbox for the "taskFinished" column
                 switch (column) {
                     case 2:
                         return Boolean.class;
@@ -38,11 +45,11 @@ public class DepositPages extends JPanel {
 
             @Override
             public boolean isCellEditable(int row, int column) {
-                // Only allow editing in the "taskfinished" column
+                // Only allow editing in the "taskFinished" column
                 if (column == 2) {
                     // If the task is finished, don't allow editing
                     JSONObject task = taskData.getJSONObject(row);
-                    return !task.getBoolean("taskfinished");
+                    return !task.getBoolean("taskFinished");
                 }
                 return false;
             }
@@ -84,15 +91,28 @@ public class DepositPages extends JPanel {
                 // Update the taskData array with the new values from the table
                 for (int i = 0; i < table.getRowCount(); i++) {
                     JSONObject task = taskData.getJSONObject(i);
-                    if (!task.getBoolean("taskfinished")) {
+                    if (!task.getBoolean("taskFinished")) {
                         if ((Boolean) table.getValueAt(i, 2) == true) {
                             // Update the task with the new values from the table
-                            task.put("taskhandletime", Tools.getCurrentTime());
-                            task.put("taskfinished", true);
-                            task.put("taskhandler", UserSession.getInstance().getCurrentUser().getString("username"));
+                            task.put("taskHandleTime", Tools.getCurrentTime());
+                            task.put("taskFinished", true);
+                            task.put("taskHandler", UserSession.getInstance().getCurrentUser().getString("username"));
                             JSONObject currentUser = UserSession.getInstance().getCurrentUser();
-                            currentUser.put("balance", currentUser.getInteger("balance") + task.getInteger("taskpay"));
+                            currentUser.put("balance", currentUser.getInteger("balance") + task.getInteger("taskPay"));
                             UserSession.getInstance().setCurrentUser(currentUser);
+                            Tools.SaveCU2CI();
+
+                            
+                            // Add transaction record
+                            JSONArray transaction = UserSession.getInstance().getCurrentTransaction();
+                            Transaction newTransaction = new Transaction();
+                            newTransaction.setTransactionId(String.valueOf(transaction.size() + 1));
+                            newTransaction.setTransactionTime(Tools.getCurrentTime());
+                            newTransaction.setTransactionAmount(task.getInteger("taskPay"));
+                            newTransaction.setTransactionDescription("Task reward");
+                            newTransaction.setTransactionMemberName(currentUser.getString("username"));
+                            transaction.add(Transaction.TransactionData2Json(newTransaction));
+                            UserSession.getInstance().setCurrentTransaction(transaction);
                         }
                     }
                     else { continue; }
@@ -101,9 +121,10 @@ public class DepositPages extends JPanel {
                 // Write the updated taskData array back to the file
                 Tools.SaveTaskInfo();
                 Tools.SaveUserInfo();
+                Tools.SaveTransactionInfo();
 
-                Object[][] data=TaskDatatoTable(taskData, columnNames);
                 // Update the table model with the new data
+                Object[][] data=TaskDatatoTable(taskData, columnNames);
                 DefaultTableModel model = (DefaultTableModel) table.getModel();
                 model.setRowCount(0); // Clear the current rows
                 for (Object[] row : data) {
@@ -115,19 +136,25 @@ public class DepositPages extends JPanel {
 
     }
 
+    /**
+     * Convert taskData to a 2D array for the table
+     * @param taskData
+     * @param columnNames
+     * @return
+     */
     public static Object[][] TaskDatatoTable(JSONArray taskData, String[] columnNames) {
         // Create data for the table
         Object[][] data = new Object[taskData.size()][columnNames.length];
         for (int i = 0; i < taskData.size(); i++) {
             JSONObject task = taskData.getJSONObject(i);
-            data[i][0] = task.getString("taskname");
-            data[i][1] = task.getString("taskid");
-            data[i][2] = task.getBoolean("taskfinished");
-            data[i][3] = task.getString("tasksettime");
-            data[i][4] = task.getString("taskhandletime");
-            data[i][5] = task.getInteger("taskpay");
-            data[i][6] = task.getString("tasksetter");
-            data[i][7] = task.getString("taskhandler");
+            data[i][0] = task.getString("taskId");
+            data[i][1] = task.getString("taskName");
+            data[i][2] = task.getBoolean("taskFinished");
+            data[i][3] = task.getString("taskSetTime");
+            data[i][4] = task.getString("taskHandleTime");
+            data[i][5] = task.getInteger("taskPay");
+            data[i][6] = task.getString("taskSetter");
+            data[i][7] = task.getString("taskHandler");
         }
         return data;
     }

@@ -4,6 +4,7 @@
 		"isParent":true,
 		"balance":1000,
 		"accountType":"current",
+		"SavingGoals":0,
 		"username":"user1"
 	},
 	{
@@ -11,22 +12,39 @@
 		"isParent":true,
 		"balance":2000,
 		"accountType":"current",
+		"SavingGoals":0,
 		"username":"user2"
 	},
 	{
 		"password":"3",
 		"isParent":false,
-		"balance":8000,
+		"balance":8600,
 		"accountType":"saving",
 		"SavingGoals":6000,
 		"username":"3"
 	},
 	{
 		"password":"2",
-		"isParent":false,
-		"balance":500,
+		"isParent":true,
+		"balance":9000,
 		"accountType":"saving",
 		"SavingGoals":5000,
 		"username":"2"
+	},
+	{
+		"password":"9",
+		"isParent":true,
+		"balance":0,
+		"accountType":"current",
+		"SavingGoals":0,
+		"username":"9"
+	},
+	{
+		"password":"5",
+		"isParent":true,
+		"balance":0,
+		"accountType":"current",
+		"SavingGoals":0,
+		"username":"5"
 	}
 ]

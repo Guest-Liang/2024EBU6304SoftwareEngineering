@@ -24,7 +24,6 @@ public class LoginWindow extends JPanel {
     private JPasswordField txtPassword;
     private JButton btnLogin;
     private JButton btnRegister;
-    JSONObject CurrentUser = new JSONObject();
 
     /**
      * The constructor of the LoginWindow class.
@@ -115,7 +114,7 @@ public class LoginWindow extends JPanel {
                         JOptionPane.showMessageDialog(null, "login success! As " + username + " (Parent)"); 
                         Tools.RefreshPages(new ParentPages(), getParent());
                     } else {
-                        JOptionPane.showMessageDialog(null, "login success! As " + username + " (Parent:" + UserSession.getInstance().getCurrentUser().getString("isParent") + ")"); 
+                        JOptionPane.showMessageDialog(null, "login success! As " + username + " (Child)"); 
                         Tools.RefreshPages(new ChildPages(), getParent());
                     }
                 } else { 
@@ -133,13 +132,24 @@ public class LoginWindow extends JPanel {
         btnExit.setFont(font);
         gbc.gridx = 0;
         gbc.gridy = 3;
-        gbc.gridwidth = 2;
+        gbc.gridwidth = 1;
         bgPanel.add(btnExit, gbc);
+
+        JButton btnTransaction = new JButton("Transaction");
+        btnTransaction.setFont(font);
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        gbc.gridwidth = 1;
+        bgPanel.add(btnTransaction, gbc);
+        btnTransaction.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Tools.RefreshPages(new TransactionPages(), getParent());
+            }
+        });
 
         setVisible(true);
         requestFocus();
         
-        JSONArray jsonArray = Tools.ReadFromFile("data/user.json");
-        UserSession.getInstance().setCurrentInfo(jsonArray);
     }
 }
