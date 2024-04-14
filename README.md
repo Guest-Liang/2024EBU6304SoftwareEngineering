@@ -7,6 +7,8 @@ java -cp childBank.jar Main
 ```
 我使用的java版本是   
 ```
+java --version
+
 Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
 java 21 2023-09-19 LTS
 Java(TM) SE Runtime Environment (build 21+35-LTS-2513)
@@ -19,4 +21,4 @@ task和user以json格式存储
 
 ## 进度
 基本完成child页面，使用user里的child账户(isParent=false)登录可以进行操作   
-parent页面还未完成，使用user里的parent账户(isParent=true)登录是只有背景图   
+基本完成parent页面，使用user里的parent账户(isParent=true)登录可以查看余额，发布任务   
