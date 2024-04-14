@@ -15,7 +15,7 @@ import java.nio.file.Files;
  * Description:
  * The class has methods to set properties of components.
  * @author Liang Zheyu
- * @version 0.0.1
+ * @version 0.1.1
  */
 public class Tools {
     private static final Font DEFAULT_FONT = new Font("Arial", Font.PLAIN, 20);

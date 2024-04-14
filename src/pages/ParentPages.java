@@ -4,8 +4,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import com.alibaba.fastjson.*;
+
 import components.*;
 
+/**
+ * The ParentPages class provides a panel for the parent to choose an item.
+ * Title : ParentPages.java
+ * Description:
+ * The class provides a panel for the parent to choose an item.
+ * @author Liang Zheyu
+ * @version 0.1.0
+ */
 public class ParentPages extends JPanel {
     public ParentPages() {
         setLayout(new BorderLayout());

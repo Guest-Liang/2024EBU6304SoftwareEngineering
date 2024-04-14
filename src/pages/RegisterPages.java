@@ -3,9 +3,9 @@ package pages;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import components.*;
-
 import com.alibaba.fastjson.*;
+
+import components.*;
 
 /**
  * The RegisterPages class provides a panel for the user to register an account.

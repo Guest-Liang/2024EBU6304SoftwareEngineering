@@ -3,9 +3,18 @@ package pages;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import components.*;
 import com.alibaba.fastjson.*;
 
+import components.*;
+
+/**
+ * The SetTaskPages class provides a panel for the user to set a task.
+ * Title : SetTaskPages.java
+ * Description:
+ * The class provides a panel for the user to set a task.
+ * @author Liang Zheyu
+ * @version 0.1.0
+ */
 public class SetTaskPages extends JPanel {
     public SetTaskPages() {
         setLayout(new BorderLayout());

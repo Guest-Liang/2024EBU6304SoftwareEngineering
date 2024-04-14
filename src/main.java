@@ -1,8 +1,17 @@
 import javax.swing.*;
-import pages.*;
-import components.*;
 import com.alibaba.fastjson.*;
 
+import pages.*;
+import components.*;
+
+/**
+ * The Main class provides the main function of the program.
+ * Title : Main.java
+ * Description:
+ * The class provides the main function of the program.
+ * @author Liang Zheyu
+ * @version 0.1.0
+ */
 public class Main {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Welcome to ChildBank");

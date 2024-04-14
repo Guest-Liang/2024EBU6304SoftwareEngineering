@@ -2,6 +2,14 @@ package components;
 
 import com.alibaba.fastjson.*;
 
+/**
+ * The UserSession class provides a user session object.
+ * Title : UserSession.java
+ * Description:
+ * The class provides a user session object.
+ * @author Liang Zheyu
+ * @version 0.1.0
+ */
 public class UserSession {
     private static UserSession instance;
     private JSONObject currentUser;

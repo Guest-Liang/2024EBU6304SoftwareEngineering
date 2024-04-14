@@ -2,11 +2,10 @@ package pages;
 
 import javax.swing.*;
 import com.alibaba.fastjson.*;
-
 import java.awt.*;
+import javax.swing.table.DefaultTableModel;
 
 import components.*;
-import javax.swing.table.DefaultTableModel;
 
 public class TransactionPages extends JPanel {
     public TransactionPages(){

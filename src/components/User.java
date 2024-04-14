@@ -2,6 +2,14 @@ package components;
 
 import com.alibaba.fastjson.*;
 
+/**
+ * The User class provides a user object.
+ * Title : User.java
+ * Description:
+ * The class provides a user object.
+ * @author Liang Zheyu
+ * @version 0.2.0
+ */
 public class User {
     private String password;
     private boolean isParent;

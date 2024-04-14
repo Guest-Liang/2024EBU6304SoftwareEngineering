@@ -29,7 +29,6 @@ public class LoginWindow extends JPanel {
      * The constructor of the LoginWindow class.
      * It creates a panel for the user to login.
      * @param void
-     * @return void
      * @throws IOException
      * @throws JSONException
      */

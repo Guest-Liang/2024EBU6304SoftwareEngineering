@@ -2,6 +2,14 @@ package components;
 
 import com.alibaba.fastjson.*;
 
+/**
+ * The Task class provides a task object.
+ * Title : Task.java
+ * Description:
+ * The class provides a task object.
+ * @author Liang Zheyu
+ * @version 0.1.0
+ */
 public class Task {
     private boolean taskFinished;
     private String taskHandleTime;

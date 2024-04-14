@@ -2,12 +2,11 @@ package pages;
 
 import javax.swing.*;
 import com.alibaba.fastjson.*;
-
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.table.DefaultTableModel;
 
 import components.*;
-import javax.swing.table.DefaultTableModel;
 
 /**
  * The DepositPages class provides a panel for the user to deposit money.
