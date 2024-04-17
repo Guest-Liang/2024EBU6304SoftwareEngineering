@@ -12,7 +12,6 @@ import components.*;
  * Title : SavingGoalPages.java
  * Description:
  * The class provides a panel for the user to set a saving goal.
- * @author Liang Zheyu
  * @version 0.0.1
  */
 public class SavingGoalPages extends JPanel{

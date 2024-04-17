@@ -7,7 +7,6 @@ import com.alibaba.fastjson.*;
  * Title : User.java
  * Description:
  * The class provides a user object.
- * @author Liang Zheyu
  * @version 0.2.0
  */
 public class User {

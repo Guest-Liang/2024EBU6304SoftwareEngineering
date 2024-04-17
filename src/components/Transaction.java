@@ -7,7 +7,6 @@ import com.alibaba.fastjson.*;
  * Title : Transaction.java
  * Description:
  * The class provides a template for a transaction.
- * @author Liang Zheyu
  * @version 1.0.0
  */
 public class Transaction {

@@ -12,7 +12,6 @@ import components.*;
  * Title : SetTaskPages.java
  * Description:
  * The class provides a panel for the user to set a task.
- * @author Liang Zheyu
  * @version 0.1.0
  */
 public class SetTaskPages extends JPanel {

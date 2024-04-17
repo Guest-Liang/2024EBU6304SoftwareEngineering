@@ -14,7 +14,6 @@ import components.*;
  * Title : LoginWindow.java
  * Description:
  * The class provides a panel for the user to login.
- * @author Liang Zheyu
  * @version 0.1.0
  */
 public class LoginWindow extends JPanel {

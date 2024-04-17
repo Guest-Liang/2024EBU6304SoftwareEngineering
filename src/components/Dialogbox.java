@@ -8,7 +8,6 @@ import java.awt.event.*;
  * Title : Dialogbox.java
  * Description:
  * The class has a constructor that creates a Dialogbox with the title and tips to show.
- * @author Liang Zheyu
  * @version 0.0.1
  */
 public class Dialogbox

@@ -7,6 +7,13 @@ import javax.swing.table.DefaultTableModel;
 
 import components.*;
 
+/**
+ * The TransactionPages class provides a panel for the user to view transactions.
+ * Title : TransactionPages.java
+ * Description:
+ * The class provides a panel for the user to view transactions.
+ * @version 0.1.0
+ */
 public class TransactionPages extends JPanel {
     public TransactionPages(){
         setLayout(new BorderLayout());

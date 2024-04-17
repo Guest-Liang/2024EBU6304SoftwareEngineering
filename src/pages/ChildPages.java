@@ -12,7 +12,6 @@ import components.*;
  * Title : ChildPages.java
  * Description:
  * The class provides a panel for the child user to choose an item.
- * @author Liang Zheyu
  * @version 0.0.1
  */
 public class ChildPages extends JPanel {

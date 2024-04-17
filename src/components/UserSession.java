@@ -7,7 +7,6 @@ import com.alibaba.fastjson.*;
  * Title : UserSession.java
  * Description:
  * The class provides a user session object.
- * @author Liang Zheyu
  * @version 0.1.0
  */
 public class UserSession {

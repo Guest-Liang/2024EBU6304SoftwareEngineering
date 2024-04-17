@@ -13,7 +13,6 @@ import components.*;
  * Title : DepositPages.java
  * Description:
  * The class provides a panel for the user to deposit money.
- * @author Liang Zheyu
  * @version 0.0.1
  */
 public class DepositPages extends JPanel {

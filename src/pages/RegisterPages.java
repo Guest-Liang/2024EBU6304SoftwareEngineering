@@ -12,7 +12,6 @@ import components.*;
  * Title : RegisterPages.java
  * Description:
  * The class provides a panel for the user to register an account.
- * @author Liang Zheyu
  * @version 0.0.1
  */
 public class RegisterPages extends JPanel {
