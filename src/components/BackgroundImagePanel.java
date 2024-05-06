@@ -10,7 +10,6 @@ import javax.swing.*;
  * Title : BackgroundImagePanel.java
  * Description:
  * The class has a constructor that creates a JPanel with a background image.
- * @version 0.0.1
  */
 public class BackgroundImagePanel extends JPanel
 {

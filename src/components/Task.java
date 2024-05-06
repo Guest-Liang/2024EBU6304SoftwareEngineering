@@ -7,7 +7,6 @@ import com.alibaba.fastjson.*;
  * Title : Task.java
  * Description:
  * The class provides a task object.
- * @version 0.1.0
  */
 public class Task {
     private boolean taskFinished;

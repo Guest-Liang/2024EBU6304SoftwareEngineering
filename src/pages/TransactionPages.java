@@ -12,7 +12,6 @@ import components.*;
  * Title : TransactionPages.java
  * Description:
  * The class provides a panel for the user to view transactions.
- * @version 0.1.0
  */
 public class TransactionPages extends JPanel {
     public TransactionPages(){
@@ -30,25 +29,47 @@ public class TransactionPages extends JPanel {
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
         JTable table = new JTable(model);
 
-        table.setFillsViewportHeight(false);
+        table.getColumnModel().getColumn(0).setPreferredWidth(50);
+        table.getColumnModel().getColumn(1).setPreferredWidth(250);
+        table.getColumnModel().getColumn(2).setPreferredWidth(100);
+        table.getColumnModel().getColumn(3).setPreferredWidth(250);
+        table.getColumnModel().getColumn(4).setPreferredWidth(100);
+        table.getTableHeader().setReorderingAllowed(false); // Disable column reordering
+        table.setFillsViewportHeight(false); // Disable auto resizing
         table.setPreferredScrollableViewportSize(new Dimension(800, 250));
-        JScrollPane scrollPane = new JScrollPane(table);
+        // Disable column resizing
+        for (int i = 0; i < table.getColumnCount(); i++) {
+            table.getColumnModel().getColumn(i).setResizable(false);
+        }
         GridBagConstraints gbc = new GridBagConstraints();
+
+        JLabel lblTitle = new JLabel("Transaction Pages");
+        Tools.setLabelProperties(lblTitle);
+        lblTitle.setFont(new Font("Arial", Font.PLAIN, 40));
         gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        bgPanel.add(lblTitle, gbc);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        gbc.gridy += 1;
         gbc.weightx = 1;
         gbc.weighty = 1;
-        gbc.gridwidth = 2;
         bgPanel.add(scrollPane, gbc);
 
-        JButton backButton = Tools.BackButton(this, new LoginWindow());
-        gbc.gridy = 1;
+        JSONObject CU = UserSession.getInstance().getCurrentUser();
+        JButton backButton;
+        if (CU.getBoolean("isParent")) {
+            backButton = Tools.BackButton(this, new ParentPages());
+        } else {
+            backButton = Tools.BackButton(this, new ChildPages());
+        }
+        gbc.gridy += 1;
         gbc.gridwidth = 1;
         bgPanel.add(backButton, gbc);
 
         JButton exitButton = Tools.ExitButton();
-        gbc.gridx = 1;
-        gbc.gridy = 1;
+        gbc.gridx += 1;
         bgPanel.add(exitButton, gbc);
 
     }

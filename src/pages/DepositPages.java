@@ -13,7 +13,6 @@ import components.*;
  * Title : DepositPages.java
  * Description:
  * The class provides a panel for the user to deposit money.
- * @version 0.0.1
  */
 public class DepositPages extends JPanel {
     public DepositPages() {
@@ -53,32 +52,48 @@ public class DepositPages extends JPanel {
             }
         };
 
-        table.setFillsViewportHeight(false);
+        table.getColumnModel().getColumn(0).setPreferredWidth(50);
+        table.getColumnModel().getColumn(1).setPreferredWidth(150);
+        table.getColumnModel().getColumn(2).setPreferredWidth(70);
+        table.getColumnModel().getColumn(3).setPreferredWidth(150);
+        table.getColumnModel().getColumn(4).setPreferredWidth(150);
+        table.getColumnModel().getColumn(5).setPreferredWidth(50);
+        table.getColumnModel().getColumn(6).setPreferredWidth(100);
+        table.getColumnModel().getColumn(7).setPreferredWidth(100);
+        table.getTableHeader().setReorderingAllowed(false); // Disable column reordering
+        table.setFillsViewportHeight(false); // Disable auto resizing
         table.setPreferredScrollableViewportSize(new Dimension(800, 250));
-        JScrollPane scrollPane = new JScrollPane(table);
+        // Disable column resizing
+        for (int i = 0; i < table.getColumnCount(); i++) {
+            table.getColumnModel().getColumn(i).setResizable(false);
+        }
+
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0; 
-        gbc.gridy = 0; 
+        JLabel lblTitle = new JLabel("Deposit Page");
+        Tools.setLabelProperties(lblTitle);
+        lblTitle.setFont(new Font("Arial", Font.PLAIN, 40));
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 3;
+        bgPanel.add(lblTitle, gbc);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        gbc.gridy += 1; 
         gbc.weightx = 1; 
         gbc.weighty = 1; 
-        gbc.gridwidth = 3;
         bgPanel.add(scrollPane, gbc);
 
         JButton btnSave = new JButton("Save");
-        gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy += 1;
         gbc.gridwidth = 1;
         bgPanel.add(btnSave, gbc);
 
         JButton btnReturn = Tools.BackButton(this, new ChildPages());
-        gbc.gridx = 1;
-        gbc.gridy = 1;
+        gbc.gridx += 1;
         bgPanel.add(btnReturn, gbc);
 
         JButton btnExit = Tools.ExitButton();
-        gbc.gridx = 2;
-        gbc.gridy = 1;
-        gbc.gridwidth = 1;
+        gbc.gridx += 1;
         bgPanel.add(btnExit, gbc);
         
         btnSave.addActionListener(new ActionListener()
@@ -92,11 +107,13 @@ public class DepositPages extends JPanel {
                     if (!task.getBoolean("taskFinished")) {
                         if ((Boolean) table.getValueAt(i, 2) == true) {
                             // Update the task with the new values from the table
+                            JSONObject currentUser = UserSession.getInstance().getCurrentUser();
+                            JSONObject accountType = currentUser.getJSONObject("accountType");
                             task.put("taskHandleTime", Tools.getCurrentTime());
                             task.put("taskFinished", true);
-                            task.put("taskHandler", UserSession.getInstance().getCurrentUser().getString("username"));
-                            JSONObject currentUser = UserSession.getInstance().getCurrentUser();
-                            currentUser.put("balance", currentUser.getInteger("balance") + task.getInteger("taskPay"));
+                            task.put("taskHandler", currentUser.getString("username"));
+                            accountType.put("current", accountType.getInteger("current") + task.getInteger("taskPay"));
+                            currentUser.put("accountType", accountType);
                             UserSession.getInstance().setCurrentUser(currentUser);
                             Tools.SaveCU2CI();
 

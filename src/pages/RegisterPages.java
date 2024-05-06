@@ -12,7 +12,6 @@ import components.*;
  * Title : RegisterPages.java
  * Description:
  * The class provides a panel for the user to register an account.
- * @version 0.0.1
  */
 public class RegisterPages extends JPanel {
     private JTextField nameField;
@@ -36,15 +35,23 @@ public class RegisterPages extends JPanel {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
     
+        // Create and add title label
+        JLabel lblTitle = new JLabel("Register your Account in this Page");
+        Tools.setLabelProperties(lblTitle);
+        lblTitle.setFont(new Font("Arial", Font.PLAIN, 40));
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        bgPanel.add(lblTitle, gbc);
+
         // Create and add name label and text field
         JLabel nameLabel = new JLabel("Name:");
         Tools.setLabelProperties(nameLabel);
-        gbc.gridx = 0;
-        gbc.gridy = 0;
+        gbc.gridy += 1;
+        gbc.gridwidth = 1;
         bgPanel.add(nameLabel, gbc);
-    
         nameField = new JTextField();
-        gbc.gridx = 1;
+        gbc.gridx += 1;
         nameField.setPreferredSize(new Dimension(200, 30));
         bgPanel.add(nameField, gbc);
     
@@ -52,58 +59,59 @@ public class RegisterPages extends JPanel {
         JLabel passwordLabel = new JLabel("Password:");
         Tools.setLabelProperties(passwordLabel);
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy += 1;
         bgPanel.add(passwordLabel, gbc);
-    
         passwordField = new JPasswordField();
         passwordField.setPreferredSize(new Dimension(200, 30));
-        gbc.gridx = 1;
+        gbc.gridx += 1;
         bgPanel.add(passwordField, gbc);
-    
-        // Create and add account type label and combo box
-        JLabel accountTypeLabel = new JLabel("Account Type:");
-        Tools.setLabelProperties(accountTypeLabel);
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        bgPanel.add(accountTypeLabel, gbc);
-
-        String[] accountTypes = {"current", "saving"};
-        accountTypeBox = new JComboBox<>(accountTypes);
-        gbc.gridx = 1;
-        bgPanel.add(accountTypeBox, gbc);
 
         JLabel parentLabel = new JLabel("Parent:");
         Tools.setLabelProperties(parentLabel);
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy += 1;
         bgPanel.add(parentLabel, gbc);
-
         String[] parentLabels = {"True", "False"};
         parentBox = new JComboBox<>(parentLabels);
-        gbc.gridx = 1;
+        gbc.gridx += 1;
         bgPanel.add(parentBox, gbc);
+
+        JLabel relativesLabel = new JLabel("Relatives:");
+        Tools.setLabelProperties(relativesLabel);
+        gbc.gridx = 0;
+        gbc.gridy += 1;
+        bgPanel.add(relativesLabel, gbc);
+        JTextField relativesField = new JTextField();
+        gbc.gridx += 1;
+        relativesField.setPreferredSize(new Dimension(200, 30));
+        bgPanel.add(relativesField, gbc);
 
         JButton btnReturn = Tools.ExitButton();
         gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy += 1;
         gbc.gridwidth = 1;
         bgPanel.add(btnReturn, gbc);
 
         JButton btnSave = new JButton("Save");
-        gbc.gridx = 1;
+        gbc.gridx += 1;
         bgPanel.add(btnSave, gbc);
         btnSave.addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                if (CheckRegister(nameField, passwordField, accountTypeBox))
+                if (CheckRegister(nameField, passwordField, relativesField, accountTypeBox))
                 {
                     User usertemp = new User();
                     usertemp.setUsername(nameField.getText());
                     usertemp.setPassword(new String(passwordField.getPassword()));
-                    usertemp.setAccountType((String) accountTypeBox.getSelectedItem());
-                    usertemp.setBalance(0);
+                    if (relativesField.getText().isEmpty()) {
+                        usertemp.setRelatives("");
+                    } else {
+                        usertemp.setRelatives(relativesField.getText());
+                    }
+                    usertemp.setSavingBalance(0);
+                    usertemp.setCurrentBalance(0);
                     usertemp.setParent(parentBox.getSelectedIndex() == 0);
                     usertemp.setSavingGoals(0);
                     
@@ -118,9 +126,11 @@ public class RegisterPages extends JPanel {
 
         JButton btnBack = Tools.BackButton(this, new LoginWindow());
         gbc.gridx = 0;
-        gbc.gridy = 5;
+        gbc.gridy += 1;
         gbc.gridwidth = 2;
         bgPanel.add(btnBack, gbc);
+        
+        gbc.gridy = 0;
     }
 
     /**
@@ -130,9 +140,10 @@ public class RegisterPages extends JPanel {
      * @param accountTypeBox
      * @return
      */
-    public static boolean CheckRegister(JTextField nameField, JPasswordField passwordField, JComboBox<String> accountTypeBox) {
+    public static boolean CheckRegister(JTextField nameField, JPasswordField passwordField, JTextField relativesField, JComboBox<String> accountTypeBox) {
         String username = nameField.getText();
         String password = new String(passwordField.getPassword());
+        String relatives = relativesField.getText();
         // String accountType = (String) accountTypeBox.getSelectedItem();
     
         // Check if username is alphanumeric
@@ -153,6 +164,10 @@ public class RegisterPages extends JPanel {
             return false;
         }
 
+        // Check if relatives is empty
+        if (relatives.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Relatives is empty. Save as empty string.");
+        }
         return true;
     }
 

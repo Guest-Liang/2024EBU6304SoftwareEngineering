@@ -14,7 +14,6 @@ import components.*;
  * Title : LoginWindow.java
  * Description:
  * The class provides a panel for the user to login.
- * @version 0.1.0
  */
 public class LoginWindow extends JPanel {
     private JLabel lblUsername;
@@ -42,16 +41,24 @@ public class LoginWindow extends JPanel {
         
         Font font = new Font("Arial", Font.PLAIN, 20); // Sets the font of the components
 
+        JLabel lblTitle = new JLabel("Welcome using ChildBank");
+        Tools.setLabelProperties(lblTitle);
+        lblTitle.setFont(new Font("Arial", Font.PLAIN, 40));
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        bgPanel.add(lblTitle, gbc);
+
         // Create the components
         lblUsername = new JLabel("username:");
         Tools.setLabelProperties(lblUsername);
         txtUsername = new JTextField(20);
         txtUsername.setFont(font);
         txtUsername.setPreferredSize(new Dimension(200, 30));
-        gbc.gridx = 0;
-        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.gridy += 1;
         bgPanel.add(lblUsername, gbc);
-        gbc.gridx = 1;
+        gbc.gridx += 1;
         bgPanel.add(txtUsername, gbc);
 
         lblPassword = new JLabel("password:");
@@ -61,16 +68,15 @@ public class LoginWindow extends JPanel {
         txtPassword.setPreferredSize(new Dimension(200, 30));
         txtPassword.setEchoChar('*');
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy += 1;
         bgPanel.add(lblPassword, gbc);
-        gbc.gridx = 1;
+        gbc.gridx += 1;
         bgPanel.add(txtPassword, gbc);
 
         btnRegister = new JButton("Register");
         btnRegister.setFont(font);
         gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.gridwidth = 1;
+        gbc.gridy += 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         bgPanel.add(btnRegister, gbc);
         btnRegister.addActionListener(new ActionListener() {
@@ -121,30 +127,16 @@ public class LoginWindow extends JPanel {
             }
         });
         gbc.gridx = 1;
-        gbc.gridy = 2;
-        gbc.gridwidth = 1;
+        gbc.gridy += 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         bgPanel.add(btnLogin, gbc);
 
         JButton btnExit = Tools.ExitButton();
         btnExit.setFont(font);
         gbc.gridx = 0;
-        gbc.gridy = 3;
-        gbc.gridwidth = 1;
+        gbc.gridy += 1;
+        gbc.gridwidth = 2;
         bgPanel.add(btnExit, gbc);
-
-        JButton btnTransaction = new JButton("Transaction");
-        btnTransaction.setFont(font);
-        gbc.gridx = 1;
-        gbc.gridy = 3;
-        gbc.gridwidth = 1;
-        bgPanel.add(btnTransaction, gbc);
-        btnTransaction.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Tools.RefreshPages(new TransactionPages(), getParent());
-            }
-        });
 
         setVisible(true);
         requestFocus();

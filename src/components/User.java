@@ -1,5 +1,8 @@
 package components;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.alibaba.fastjson.*;
 
 /**
@@ -7,13 +10,12 @@ import com.alibaba.fastjson.*;
  * Title : User.java
  * Description:
  * The class provides a user object.
- * @version 0.2.0
  */
 public class User {
     private String password;
     private boolean isParent;
-    private int balance;
-    private String accountType;
+    private String relatives;
+    private Map<String, Integer> accountType;
     private String username;
     private int SavingGoals;
 
@@ -22,19 +24,24 @@ public class User {
         JSONObject userJson = new JSONObject();
         userJson.put("password", user.getPassword());
         userJson.put("isParent", user.isParent());
-        userJson.put("balance", user.getBalance());
-        userJson.put("accountType", user.getAccountType());
+        userJson.put("relatives", user.getRelatives());
+        JSONObject accoutTypeJson = new JSONObject();
+        accoutTypeJson.put("saving", user.getSavingBalance());
+        accoutTypeJson.put("current", user.getCurrentBalance());
+        userJson.put("accountType", accoutTypeJson);
         userJson.put("username", user.getUsername());
         userJson.put("SavingGoals", user.getSavingGoals());
         return userJson;
     }
 
-    public User() {}
+    public User() {
+        accountType = new HashMap<>();
+    }
 
-    public User(String password, boolean isParent, int balance, String accountType, String username, int SavingGoals) {
+    public User(String password, boolean isParent, String relatives, Map<String, Integer> accountType, String username, int SavingGoals) {
         this.password = password;
         this.isParent = isParent;
-        this.balance = balance;
+        this.relatives = relatives;
         this.accountType = accountType;
         this.username = username;
         this.SavingGoals = SavingGoals;
@@ -58,19 +65,35 @@ public class User {
         this.isParent = isParent;
     }
 
-    public int getBalance() {
-        return balance;
+    public String getRelatives() {
+        return relatives;
     }
 
-    public void setBalance(int balance) {
-        this.balance = balance;
+    public void setRelatives(String relatives) {
+        this.relatives = relatives;
     }
 
-    public String getAccountType() {
+    public int getSavingBalance() {
+        return accountType.get("saving");
+    }
+
+    public void setSavingBalance(int savingBalance) {
+        this.accountType.put("saving", savingBalance);
+    }
+
+    public int getCurrentBalance() {
+        return accountType.get("current");
+    }
+
+    public void setCurrentBalance(int currentBalance) {
+        this.accountType.put("current", currentBalance);
+    }
+
+    public Map<String, Integer> getAccountType() {
         return accountType;
     }
 
-    public void setAccountType(String accountType) {
+    public void setAccountType(Map<String, Integer> accountType) {
         this.accountType = accountType;
     }
 

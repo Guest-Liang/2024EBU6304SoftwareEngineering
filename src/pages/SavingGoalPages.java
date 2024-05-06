@@ -12,7 +12,6 @@ import components.*;
  * Title : SavingGoalPages.java
  * Description:
  * The class provides a panel for the user to set a saving goal.
- * @version 0.0.1
  */
 public class SavingGoalPages extends JPanel{
     /**
@@ -30,50 +29,62 @@ public class SavingGoalPages extends JPanel{
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10); // Sets the spacing between components
+        gbc.anchor = GridBagConstraints.CENTER;
 
-        // Add a label to display the current goal
-        JLabel goalLabel = new JLabel("Current Goal: " + UserSession.getInstance().getCurrentUser().get("SavingGoals") + " Current Balance: " + UserSession.getInstance().getCurrentUser().get("balance"));
-        Tools.setLabelProperties(goalLabel);
+        JLabel lblTitle = new JLabel("Saving Goal Pages");
+        Tools.setLabelProperties(lblTitle);
+        lblTitle.setFont(new Font("Arial", Font.PLAIN, 40));
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 3;
+        bgPanel.add(lblTitle, gbc);
+
+        // Add a label to display the current goal
+        JSONObject CU = UserSession.getInstance().getCurrentUser();
+        String labelText = "<html>Current Goal: " + CU.get("SavingGoals")
+                         + "<br>Current Balance: " + CU.getJSONObject("accountType").getString("current") + "</br>"
+                         + "<br>Saving Balance: " + CU.getJSONObject("accountType").getString("saving") + "</br>"
+                         + "</html>";
+        JLabel goalLabel = new JLabel(labelText);
+        Tools.setLabelProperties(goalLabel);
+        gbc.gridy += 1;
         bgPanel.add(goalLabel, gbc);
 
         // Add a button for adjusting the goal
         JButton adjustButton = new JButton("Adjust Goal");
-        gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy += 1;
         gbc.gridwidth = 1;
         bgPanel.add(adjustButton, gbc);
 
         JButton reButton = Tools.BackButton(this, new ChildPages());
-        gbc.gridx = 1;
-        gbc.gridy = 1;
+        gbc.gridx += 1;
         bgPanel.add(reButton, gbc);
 
         // Add a button for exiting
         JButton exitButton = Tools.ExitButton();
-        gbc.gridx = 2;
-        gbc.gridy = 1;
+        gbc.gridx += 1;
         bgPanel.add(exitButton, gbc);
 
         adjustButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JSONObject currentUser = UserSession.getInstance().getCurrentUser();
                 while (true) {
                     String newGoal = JOptionPane.showInputDialog("Enter the new goal:");
                     if (newGoal == null) { break; } // User clicked the cancel button
                     try {
                         int goal = Integer.parseInt(newGoal);
-                        currentUser.put("SavingGoals", goal);
-                        goalLabel.setText("Current Goal: " + goal + " Current Balance: " + UserSession.getInstance().getCurrentUser().get("balance"));
+                        CU.put("SavingGoals", goal);
+                        String labelText = "<html>Current Goal: " + CU.get("SavingGoals")
+                                         + "<br>Current Balance: " + CU.getJSONObject("accountType").getString("current") + "</br>"
+                                         + "<br>Saving Balance: " + CU.getJSONObject("accountType").getString("saving") + "</br>"
+                                         + "</html>";
+                        goalLabel.setText(labelText);
                         break;
                     } catch (NumberFormatException ex) {
                         JOptionPane.showMessageDialog(null, "Invalid input. Please enter a valid goal.");
                     }
                 }
-                UserSession.getInstance().setCurrentUser(currentUser);
+                UserSession.getInstance().setCurrentUser(CU);
                 Tools.SaveCU2CI();
                 Tools.SaveUserInfo();
             }
