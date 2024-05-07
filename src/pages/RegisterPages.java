@@ -38,7 +38,7 @@ public class RegisterPages extends JPanel {
         // Create and add title label
         JLabel lblTitle = new JLabel("Register your Account in this Page");
         Tools.setLabelProperties(lblTitle);
-        lblTitle.setFont(new Font("Arial", Font.PLAIN, 40));
+        lblTitle.setFont(Tools.DEFAULT_TITLE_FONT);
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 2;
@@ -87,12 +87,14 @@ public class RegisterPages extends JPanel {
         bgPanel.add(relativesField, gbc);
 
         JButton btnReturn = Tools.ExitButton();
+        btnReturn.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx = 0;
         gbc.gridy += 1;
         gbc.gridwidth = 1;
         bgPanel.add(btnReturn, gbc);
 
         JButton btnSave = new JButton("Save");
+        btnSave.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx += 1;
         bgPanel.add(btnSave, gbc);
         btnSave.addActionListener(new ActionListener()
@@ -125,6 +127,7 @@ public class RegisterPages extends JPanel {
         });
 
         JButton btnBack = Tools.BackButton(this, new LoginWindow());
+        btnBack.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx = 0;
         gbc.gridy += 1;
         gbc.gridwidth = 2;

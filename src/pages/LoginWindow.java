@@ -38,22 +38,20 @@ public class LoginWindow extends JPanel {
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(4, 4, 4, 4); // Sets the spacing between components
-        
-        Font font = new Font("Arial", Font.PLAIN, 20); // Sets the font of the components
 
         JLabel lblTitle = new JLabel("Welcome using ChildBank");
         Tools.setLabelProperties(lblTitle);
-        lblTitle.setFont(new Font("Arial", Font.PLAIN, 40));
+        lblTitle.setFont(Tools.DEFAULT_TITLE_FONT);
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 2;
         bgPanel.add(lblTitle, gbc);
 
         // Create the components
-        lblUsername = new JLabel("username:");
+        lblUsername = new JLabel("Username:");
         Tools.setLabelProperties(lblUsername);
         txtUsername = new JTextField(20);
-        txtUsername.setFont(font);
+        txtUsername.setFont(Tools.DEFAULT_BUTTON_FONT);
         txtUsername.setPreferredSize(new Dimension(200, 30));
         gbc.gridwidth = 1;
         gbc.gridy += 1;
@@ -61,10 +59,10 @@ public class LoginWindow extends JPanel {
         gbc.gridx += 1;
         bgPanel.add(txtUsername, gbc);
 
-        lblPassword = new JLabel("password:");
+        lblPassword = new JLabel("Password:");
         Tools.setLabelProperties(lblPassword);
         txtPassword = new JPasswordField(20);
-        txtPassword.setFont(font);
+        txtPassword.setFont(Tools.DEFAULT_BUTTON_FONT);
         txtPassword.setPreferredSize(new Dimension(200, 30));
         txtPassword.setEchoChar('*');
         gbc.gridx = 0;
@@ -74,7 +72,7 @@ public class LoginWindow extends JPanel {
         bgPanel.add(txtPassword, gbc);
 
         btnRegister = new JButton("Register");
-        btnRegister.setFont(font);
+        btnRegister.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx = 0;
         gbc.gridy += 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -87,7 +85,7 @@ public class LoginWindow extends JPanel {
         });
 
         btnLogin = new JButton("Login");
-        btnLogin.setFont(font);
+        btnLogin.setFont(Tools.DEFAULT_BUTTON_FONT);
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -126,13 +124,12 @@ public class LoginWindow extends JPanel {
                 }
             }
         });
-        gbc.gridx = 1;
-        gbc.gridy += 1;
+        gbc.gridx += 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         bgPanel.add(btnLogin, gbc);
 
         JButton btnExit = Tools.ExitButton();
-        btnExit.setFont(font);
+        btnExit.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx = 0;
         gbc.gridy += 1;
         gbc.gridwidth = 2;

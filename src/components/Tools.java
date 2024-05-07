@@ -16,13 +16,14 @@ import java.nio.file.Files;
  * The class has methods to set properties of components.
  */
 public class Tools {
-    private static final Font DEFAULT_FONT = new Font("Arial", Font.PLAIN, 20);
-    private static final Color DEFAULT_FOREGROUND = Color.WHITE;
-    private static final boolean DEFAULT_OPAQUE = true;
-    private static final Color DEFAULT_BACKGROUND = new Color(0, 0, 0, 64);
+    public static final Font DEFAULT_BUTTON_FONT = new Font("Arial", Font.PLAIN, 20);
+    public static final Font DEFAULT_TITLE_FONT = new Font("Arial", Font.PLAIN, 40);
+    public static final Color DEFAULT_FOREGROUND = Color.WHITE;
+    public static final boolean DEFAULT_OPAQUE = true;
+    public static final Color DEFAULT_BACKGROUND = new Color(0, 0, 0, 64);
 
     public static void setLabelProperties(JLabel label) {
-        setLabelProperties(label, DEFAULT_FONT, DEFAULT_FOREGROUND, DEFAULT_OPAQUE, DEFAULT_BACKGROUND);
+        setLabelProperties(label, DEFAULT_BUTTON_FONT, DEFAULT_FOREGROUND, DEFAULT_OPAQUE, DEFAULT_BACKGROUND);
     }
 
     public static void setLabelProperties(JLabel label, Font font) {

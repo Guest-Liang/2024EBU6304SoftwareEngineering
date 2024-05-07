@@ -71,7 +71,7 @@ public class DepositPages extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         JLabel lblTitle = new JLabel("Deposit Page");
         Tools.setLabelProperties(lblTitle);
-        lblTitle.setFont(new Font("Arial", Font.PLAIN, 40));
+        lblTitle.setFont(Tools.DEFAULT_TITLE_FONT);
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 3;
@@ -84,15 +84,18 @@ public class DepositPages extends JPanel {
         bgPanel.add(scrollPane, gbc);
 
         JButton btnSave = new JButton("Save");
+        btnSave.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridy += 1;
         gbc.gridwidth = 1;
         bgPanel.add(btnSave, gbc);
 
         JButton btnReturn = Tools.BackButton(this, new ChildPages());
+        btnReturn.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx += 1;
         bgPanel.add(btnReturn, gbc);
 
         JButton btnExit = Tools.ExitButton();
+        btnExit.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx += 1;
         bgPanel.add(btnExit, gbc);
         

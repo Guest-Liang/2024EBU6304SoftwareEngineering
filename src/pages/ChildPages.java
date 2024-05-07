@@ -30,9 +30,12 @@ public class ChildPages extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10); // Sets the spacing between components
 
+        JSONObject CU = UserSession.getInstance().getCurrentUser();
+        JSONObject AT = CU.getJSONObject("accountType");
+
         JLabel lblTitle = new JLabel("Children Page");
         Tools.setLabelProperties(lblTitle);
-        lblTitle.setFont(new Font("Arial", Font.PLAIN, 40));
+        lblTitle.setFont(Tools.DEFAULT_TITLE_FONT);
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 5;
@@ -44,32 +47,39 @@ public class ChildPages extends JPanel {
         bgPanel.add(label, gbc);
     
         btnShowBalance = new JButton("show balance");
+        btnShowBalance.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridy += 1;
         gbc.gridwidth = 1;
         bgPanel.add(btnShowBalance, gbc);
     
         btnSavingGoal = new JButton("saving goal");
+        btnSavingGoal.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx += 1;
         bgPanel.add(btnSavingGoal, gbc);
     
         btnWithdraw = new JButton("Withdrawal");
+        btnWithdraw.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx += 1;
         bgPanel.add(btnWithdraw, gbc);
     
         btnDeposit = new JButton("deposit");
+        btnDeposit.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx += 1;
         bgPanel.add(btnDeposit, gbc);
 
         btnTransaction = new JButton("Transaction");
+        btnTransaction.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx += 1;
         bgPanel.add(btnTransaction, gbc);
 
         JButton btnBack = Tools.BackButton(this, new LoginWindow());
+        btnBack.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx = 0;
         gbc.gridy += 1;
         bgPanel.add(btnBack, gbc);
         
         btnExit = Tools.ExitButton();
+        btnExit.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx += 1;
         bgPanel.add(btnExit, gbc);
 
@@ -78,8 +88,6 @@ public class ChildPages extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                JSONObject CU = UserSession.getInstance().getCurrentUser();
-                JSONObject AT = CU.getJSONObject("accountType");
                 String message = "Your balance is: " 
                     + "\ncurrent: " + AT.getString("current") 
                     + "\nsaving: " + AT.getString("saving");
@@ -101,8 +109,6 @@ public class ChildPages extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                JSONObject CU = UserSession.getInstance().getCurrentUser();
-                JSONObject AT = CU.getJSONObject("accountType");
                 String current = AT.getString("current");
                 String message = "Your balance is: " 
                     + "\ncurrent: " + AT.getInteger("current") 

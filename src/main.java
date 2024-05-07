@@ -9,7 +9,6 @@ import components.*;
  * Title : Main.java
  * Description:
  * The class provides the main function of the program.
- * @version 0.1.0
  */
 public class Main {
     public static void main(String[] args) {

@@ -33,7 +33,7 @@ public class SavingGoalPages extends JPanel{
 
         JLabel lblTitle = new JLabel("Saving Goal Pages");
         Tools.setLabelProperties(lblTitle);
-        lblTitle.setFont(new Font("Arial", Font.PLAIN, 40));
+        lblTitle.setFont(Tools.DEFAULT_TITLE_FONT);
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 3;
@@ -52,16 +52,19 @@ public class SavingGoalPages extends JPanel{
 
         // Add a button for adjusting the goal
         JButton adjustButton = new JButton("Adjust Goal");
+        adjustButton.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridy += 1;
         gbc.gridwidth = 1;
         bgPanel.add(adjustButton, gbc);
 
         JButton reButton = Tools.BackButton(this, new ChildPages());
+        reButton.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx += 1;
         bgPanel.add(reButton, gbc);
 
         // Add a button for exiting
         JButton exitButton = Tools.ExitButton();
+        exitButton.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx += 1;
         bgPanel.add(exitButton, gbc);
 

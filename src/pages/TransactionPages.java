@@ -45,7 +45,7 @@ public class TransactionPages extends JPanel {
 
         JLabel lblTitle = new JLabel("Transaction Pages");
         Tools.setLabelProperties(lblTitle);
-        lblTitle.setFont(new Font("Arial", Font.PLAIN, 40));
+        lblTitle.setFont(Tools.DEFAULT_TITLE_FONT);
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 2;
@@ -64,11 +64,13 @@ public class TransactionPages extends JPanel {
         } else {
             backButton = Tools.BackButton(this, new ChildPages());
         }
+        backButton.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridy += 1;
         gbc.gridwidth = 1;
         bgPanel.add(backButton, gbc);
 
         JButton exitButton = Tools.ExitButton();
+        exitButton.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx += 1;
         bgPanel.add(exitButton, gbc);
 

@@ -28,7 +28,7 @@ public class SetTaskPages extends JPanel {
 
         JLabel lblTitle = new JLabel("Setting Task Page");
         Tools.setLabelProperties(lblTitle);
-        lblTitle.setFont(new Font("Arial", Font.PLAIN, 40));
+        lblTitle.setFont(Tools.DEFAULT_TITLE_FONT);
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 2;
@@ -62,15 +62,18 @@ public class SetTaskPages extends JPanel {
 
 
         JButton btnExit = Tools.ExitButton();
+        btnExit.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx = 0;
         gbc.gridy += 1;        
         bgPanel.add(btnExit, gbc);
 
         JButton btnSave = new JButton("Save");
+        btnSave.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx += 1;
         bgPanel.add(btnSave, gbc);
 
         JButton btnBack = Tools.BackButton(this, new ParentPages());
+        btnBack.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx = 0;
         gbc.gridy += 1;
         gbc.gridwidth = 2;
@@ -88,7 +91,7 @@ public class SetTaskPages extends JPanel {
                     task.setTaskHandleTime("");
                     task.setTaskSetTime(Tools.getCurrentTime());
                     task.setTaskId(newTaskId);
-                    task.setTaskSetter(UserSession.getInstance().getCurrentUser().getString("username"));
+                    task.setTaskSetter(cu.getString("username"));
                     task.setTaskHandler("");
 
                     JSONObject taskJson = Task.TaskData2Json(task);

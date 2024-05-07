@@ -1,32 +1,35 @@
 [
 	{
-		"password":"pass1",
-		"isParent":true,
+		"password":"p1",
+		"isParent":false,
 		"accountType":{
 			"saving":1000,
 			"current":0
 		},
 		"SavingGoals":0,
-		"username":"user1"
+		"relatives":"u2",
+		"username":"u1"
 	},
 	{
-		"password":"pass2",
+		"password":"p2",
 		"isParent":true,
 		"accountType":{
 			"saving":0,
 			"current":2000
 		},
 		"SavingGoals":0,
-		"username":"user2"
+		"relatives":"u1",
+		"username":"u2"
 	},
 	{
 		"password":"3",
 		"isParent":false,
 		"accountType":{
 			"saving":30000,
-			"current":10000
+			"current":8000
 		},
-		"SavingGoals":8000,
+		"SavingGoals":60000,
+		"relatives":"2",
 		"username":"3"
 	},
 	{
@@ -37,6 +40,7 @@
 			"current":9000
 		},
 		"SavingGoals":5000,
+		"relatives":"3",
 		"username":"2"
 	},
 	{
@@ -47,16 +51,7 @@
 			"current":0
 		},
 		"SavingGoals":0,
+		"relatives":"",
 		"username":"9"
-	},
-	{
-		"password":"5",
-		"isParent":true,
-		"accountType":{
-			"saving":0,
-			"current":0
-		},
-		"SavingGoals":0,
-		"username":"5"
 	}
 ]
