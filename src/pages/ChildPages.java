@@ -41,18 +41,30 @@ public class ChildPages extends JPanel {
         gbc.gridwidth = 5;
         bgPanel.add(lblTitle, gbc);
 
+        String Description = "<html>Some Tips:"
+            + "<br>1.Know your income and expenses, create a reasonable budget, and stick to it. " + "</br>"
+            + "<br>2.Avoid unnecessary consumption and try to choose cost-effective goods and services. " + "</br>"
+            + "<br>3.Set aside a portion of your monthly income as savings to put into a savings account or invest." + "</br>"
+            + "<br>4.Long-term planning and savings are required for large purchases. " + "</br>"
+            + "<br>5.Develop a habit of saving money, and don't spend all your money on things you don't need. " + "</br>"
+            + "</html>";
+        JLabel lblDescription = new JLabel(Description); 
+        Tools.setLabelProperties(lblDescription);
+        gbc.gridy += 1;
+        bgPanel.add(lblDescription, gbc);
+
         JLabel label = new JLabel("Choose a item");
         Tools.setLabelProperties(label);
         gbc.gridy += 1;
+        gbc.gridwidth = 1;
         bgPanel.add(label, gbc);
     
-        btnShowBalance = new JButton("show balance");
+        btnShowBalance = new JButton("Show Balance");
         btnShowBalance.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridy += 1;
-        gbc.gridwidth = 1;
         bgPanel.add(btnShowBalance, gbc);
     
-        btnSavingGoal = new JButton("saving goal");
+        btnSavingGoal = new JButton("Saving Goal");
         btnSavingGoal.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx += 1;
         bgPanel.add(btnSavingGoal, gbc);
@@ -62,7 +74,7 @@ public class ChildPages extends JPanel {
         gbc.gridx += 1;
         bgPanel.add(btnWithdraw, gbc);
     
-        btnDeposit = new JButton("deposit");
+        btnDeposit = new JButton("Deposit");
         btnDeposit.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx += 1;
         bgPanel.add(btnDeposit, gbc);
