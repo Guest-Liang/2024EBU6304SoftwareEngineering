@@ -4,6 +4,7 @@ import javax.swing.*;
 import com.alibaba.fastjson.*;
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
 
 import components.*;
 
@@ -14,6 +15,15 @@ import components.*;
  * The class provides a panel for the user to view transactions.
  */
 public class TransactionPages extends JPanel {
+    /**
+     * Constructor of the TransactionPages class, initializes the panel layout,
+     * adds a background image, sets the user session, and adds various buttons and labels.
+     * It creates a panel for the user to view transactions.
+     * @param void
+     * @return void
+     * @throws JSONException
+     * @throws IOException
+     */
     public TransactionPages(){
         setLayout(new BorderLayout());
         BackgroundImagePanel bgPanel = new BackgroundImagePanel("data/bg.jpg");
@@ -21,19 +31,25 @@ public class TransactionPages extends JPanel {
         add(bgPanel, BorderLayout.CENTER);
 
         JSONArray transactionData = UserSession.getInstance().getCurrentTransaction();
+        JSONObject CU = UserSession.getInstance().getCurrentUser();
 
         // Create column names
         String[] columnNames = {"Id", "Description", "Amount", "Time", "MemberName"};
 
-        Object[][] data = TransactionDatatoTable(transactionData, columnNames);
+        Object[][] data;
+        if (CU.getBooleanValue("isParent")) {
+            data = TransactionDatatoTable(transactionData, columnNames, true);
+        } else {
+            data = TransactionDatatoTable(transactionData, columnNames, false);
+        }
+
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
         JTable table = new JTable(model);
 
-        table.getColumnModel().getColumn(0).setPreferredWidth(50);
-        table.getColumnModel().getColumn(1).setPreferredWidth(250);
-        table.getColumnModel().getColumn(2).setPreferredWidth(100);
-        table.getColumnModel().getColumn(3).setPreferredWidth(250);
-        table.getColumnModel().getColumn(4).setPreferredWidth(100);
+        int[] columnWidths = {50, 250, 100, 250, 100};
+        for (int i = 0; i < columnWidths.length; i++) {
+            table.getColumnModel().getColumn(i).setPreferredWidth(columnWidths[i]); // Set column width
+        }
         table.getTableHeader().setReorderingAllowed(false); // Disable column reordering
         table.setFillsViewportHeight(false); // Disable auto resizing
         table.setPreferredScrollableViewportSize(new Dimension(800, 250));
@@ -51,13 +67,22 @@ public class TransactionPages extends JPanel {
         gbc.gridwidth = 2;
         bgPanel.add(lblTitle, gbc);
 
+        JLabel lblIntro = new JLabel("");
+        if (CU.getBooleanValue("isParent")) {
+            lblIntro.setText("Your and your child's transactions");
+        } else {
+            lblIntro.setText("Your own transactions");
+        }
+        Tools.setLabelProperties(lblIntro);
+        gbc.gridy += 1;
+        bgPanel.add(lblIntro, gbc);
+
         JScrollPane scrollPane = new JScrollPane(table);
         gbc.gridy += 1;
         gbc.weightx = 1;
         gbc.weighty = 1;
         bgPanel.add(scrollPane, gbc);
 
-        JSONObject CU = UserSession.getInstance().getCurrentUser();
         JButton backButton;
         if (CU.getBoolean("isParent")) {
             backButton = Tools.BackButton(this, new ParentPages());
@@ -78,20 +103,37 @@ public class TransactionPages extends JPanel {
 
     /**
      * Convert transaction data to table
-     * @param transactionData
-     * @param columnNames
-     * @return
+     * @param transactionData transaction data
+     * @param columnNames column names
+     * @param childShowAll whether to show all child transactions
+     * @return Object[][] data
      */
-    private Object[][] TransactionDatatoTable(JSONArray transactionData, String[] columnNames) {
-        Object[][] data = new Object[transactionData.size()][columnNames.length];
+    private Object[][] TransactionDatatoTable(JSONArray transactionData, String[] columnNames, boolean childShowAll) {
+        JSONObject CU = UserSession.getInstance().getCurrentUser();
+        String currentUsername = CU.getString("username");
+        String childUsername = CU.getString("relatives");
+
+        ArrayList<Object[]> dataList = new ArrayList<>();
         for (int i = 0; i < transactionData.size(); i++) {
             JSONObject transaction = transactionData.getJSONObject(i);
-            data[i][0] = transaction.getString("transactionId");
-            data[i][1] = transaction.getString("transactionDescription");
-            data[i][2] = transaction.getString("transactionAmount");
-            data[i][3] = transaction.getString("transactionTime");
-            data[i][4] = transaction.getString("transactionMemberName");
+            String transactionMemberName = transaction.getString("transactionMemberName");
+            if (transactionMemberName.equals(currentUsername) || 
+                (childShowAll && transactionMemberName.equals(childUsername))) {
+                Object[] data = new Object[columnNames.length];
+                data[0] = transaction.getString("transactionId");
+                data[1] = transaction.getString("transactionDescription");
+                data[2] = transaction.getString("transactionAmount");
+                data[3] = transaction.getString("transactionTime");
+                data[4] = transaction.getString("transactionMemberName");
+                dataList.add(data);
+            }
         }
+
+        Object[][] data = new Object[dataList.size()][columnNames.length];
+        for (int i = 0; i < dataList.size(); i++) {
+            data[i] = dataList.get(i);
+        }
+
         return data;
     }
 

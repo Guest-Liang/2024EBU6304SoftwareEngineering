@@ -26,9 +26,9 @@
 		"isParent":false,
 		"accountType":{
 			"saving":30000,
-			"current":8000
+			"current":9000
 		},
-		"SavingGoals":60000,
+		"SavingGoals":6000,
 		"relatives":"2",
 		"username":"3"
 	},
@@ -37,7 +37,7 @@
 		"isParent":true,
 		"accountType":{
 			"saving":20000,
-			"current":9000
+			"current":8950
 		},
 		"SavingGoals":5000,
 		"relatives":"3",

@@ -14,6 +14,9 @@ import java.nio.charset.StandardCharsets;
 
 public class ToolsTest {
 
+    /**
+     * Test the setLabelProperties method.
+     */
     @Test
     public void testSetLabelProperties() {
         JLabel label = new JLabel();
@@ -25,6 +28,9 @@ public class ToolsTest {
         assertEquals(Tools.DEFAULT_BACKGROUND, label.getBackground());
     }
 
+    /**
+     * Test the setLabelProperties method with font.
+     */
     @Test
     public void testSetLabelPropertiesWithFont() {
         JLabel label = new JLabel();
@@ -37,6 +43,9 @@ public class ToolsTest {
         assertEquals(Tools.DEFAULT_BACKGROUND, label.getBackground());
     }
 
+    /**
+     * Test the setLabelProperties method with font and foreground.
+     */
     @Test
     public void testSetLabelPropertiesWithFontAndForeground() {
         JLabel label = new JLabel();
@@ -50,6 +59,9 @@ public class ToolsTest {
         assertEquals(Tools.DEFAULT_BACKGROUND, label.getBackground());
     }
 
+    /**
+     * Test the setLabelProperties method with font, foreground, and opaque.
+     */
     @Test
     public void testSetLabelPropertiesWithFontForegroundAndOpaque() {
         JLabel label = new JLabel();
@@ -64,6 +76,9 @@ public class ToolsTest {
         assertEquals(Tools.DEFAULT_BACKGROUND, label.getBackground());
     }
 
+    /**
+     * Test the setLabelProperties method with font, foreground, opaque, and background.
+     */
     @Test
     public void testSetLabelPropertiesWithFontForegroundOpaqueAndBackground() {
         JLabel label = new JLabel();
@@ -79,6 +94,9 @@ public class ToolsTest {
         assertEquals(background, label.getBackground());
     }
 
+    /**
+     * Test the refreshPages method.
+     */
     @Test
     public void testRefreshPages() {
         JPanel newPage = new JPanel();
@@ -90,6 +108,9 @@ public class ToolsTest {
         assertEquals(newPage, container.getComponent(0));
     }
 
+    /**
+     * Test the ExitButton method.
+     */
     @Test
     public void testExitButton() {
         JButton btnReturn = Tools.ExitButton();
@@ -98,6 +119,9 @@ public class ToolsTest {
         assertEquals(1, btnReturn.getActionListeners().length);
     }
     
+    /**
+     * Test the BackButton method.
+     */
     @Test
     public void testBackButton() {
         Container container = new Container();
@@ -113,6 +137,10 @@ public class ToolsTest {
         assertEquals(newPage, container.getComponent(0));
     }
 
+    /**
+     * Test the WriteToFile method.
+     * @throws IOException
+     */
     @Test
     public void testWriteToFile() throws IOException {
         JSONArray jsonArray = new JSONArray();
@@ -131,6 +159,10 @@ public class ToolsTest {
         Files.deleteIfExists(Paths.get(filePath));
     }
 
+    /**
+     * Test the SaveUserInfo method.
+     * @throws IOException
+     */
     @Test
     public void testSaveUserInfo() throws IOException {
         // Prepare the UserSession
@@ -157,6 +189,9 @@ public class ToolsTest {
         Files.deleteIfExists(Paths.get("data/user_backup.json"));
     }
 
+    /**
+     * Test the SaveCU2CI method.
+     */
     @Test
     public void testSaveCU2CI() {
         // Prepare the UserSession
@@ -188,6 +223,10 @@ public class ToolsTest {
         assertFalse(updatedUser2.containsKey("email"));
     }
 
+    /**
+     * Test the ReadFromFile method.
+     * @throws IOException
+     */
     @Test
     public void testReadFromFile() throws IOException {
         // Prepare a test file
@@ -207,6 +246,10 @@ public class ToolsTest {
         Files.deleteIfExists(Paths.get(filePath));
     }
 
+    /**
+     * Test the ReadUserInfo method.
+     * @throws IOException
+     */
     @Test
     public void testSaveTaskInfo() throws IOException {
         // Prepare the UserSession
@@ -233,6 +276,9 @@ public class ToolsTest {
         Files.deleteIfExists(Paths.get("data/task_backup.json"));
     }
 
+    /**
+     * Test the GetCurrentTime method.
+     */
     @Test
     public void testGetCurrentTime() {
         // Call the method to test
@@ -243,6 +289,10 @@ public class ToolsTest {
         assertTrue(currentTime.matches("\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}"));
     }
 
+    /**
+     * Test the SaveTransactionInfo method.
+     * @throws IOException
+     */
     @Test
     public void testSaveTransactionInfo() throws IOException {
         // Prepare the UserSession

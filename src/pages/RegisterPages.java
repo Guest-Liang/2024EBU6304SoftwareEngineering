@@ -97,6 +97,11 @@ public class RegisterPages extends JPanel {
         btnSave.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx += 1;
         bgPanel.add(btnSave, gbc);
+        /**
+         * When the "Save" button is clicked, the user input is checked and saved as a new user.
+         * If the user input is valid, the user will be saved as a new user.
+         * If the user input is invalid, a message dialog will show the error message.
+         */
         btnSave.addActionListener(new ActionListener()
         {
             @Override
@@ -138,9 +143,9 @@ public class RegisterPages extends JPanel {
 
     /**
      * Check if the user input is valid for registration.
-     * @param nameField
-     * @param passwordField
-     * @param accountTypeBox
+     * @param nameField username field
+     * @param passwordField password field
+     * @param accountTypeBox account type box
      * @return
      */
     public static boolean CheckRegister(JTextField nameField, JPasswordField passwordField, JTextField relativesField, JComboBox<String> accountTypeBox) {
@@ -176,8 +181,8 @@ public class RegisterPages extends JPanel {
 
     /**
      * Check if the username already exists.
-     * @param username
-     * @return
+     * @param username username
+     * @return boolean true if the username already exists, false otherwise
      */
     public static boolean usernameExists(String username) {
         JSONArray currentInfo = UserSession.getInstance().getCurrentInfo();

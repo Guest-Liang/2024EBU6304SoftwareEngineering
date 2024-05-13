@@ -77,6 +77,9 @@ public class LoginWindow extends JPanel {
         gbc.gridy += 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         bgPanel.add(btnRegister, gbc);
+        /**
+         * Register button action listener
+         */
         btnRegister.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -86,6 +89,11 @@ public class LoginWindow extends JPanel {
 
         btnLogin = new JButton("Login");
         btnLogin.setFont(Tools.DEFAULT_BUTTON_FONT);
+        /**
+         * When the login button is clicked, the program will check the username and password.
+         * If the username and password are correct, the program will show a message dialog with "login success!".
+         * If the username and password are incorrect, the program will show a message dialog with "login fail!".
+         */
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {

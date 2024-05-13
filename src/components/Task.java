@@ -3,10 +3,18 @@ package components;
 import com.alibaba.fastjson.*;
 
 /**
- * The Task class provides a task object.
+ * The Task class represents a task in a to-do list.
  * Title : Task.java
  * Description:
- * The class provides a task object.
+ * This class provides a task object, which includes properties such as title, description, due date, and status.
+ * Main methods:
+ * - setTaskName(String taskName): Sets the name of the task.
+ * - setTaskPay(int taskPay): Sets the pay of the task.
+ * 
+ * Example usage:
+ * Task myTask = new Task();
+ * myTask.setTaskName("Buy groceries");
+ * myTask.setTaskPay(20);
  */
 public class Task {
     private boolean taskFinished;

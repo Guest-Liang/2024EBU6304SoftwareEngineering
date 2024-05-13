@@ -68,6 +68,13 @@ public class SavingGoalPages extends JPanel{
         gbc.gridx += 1;
         bgPanel.add(exitButton, gbc);
 
+        /**
+         * When the Adjust Goal button is clicked, show an input dialog for the user to enter a new saving goal.
+         * If the user enters a valid integer, set the new saving goal to the user input and update the goal label text.
+         * If the user enters an invalid input, show a message dialog to inform the user of the invalid input.
+         * If the user clicks the cancel button, do nothing.
+         * Finally, save the user's information.
+         */
         adjustButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

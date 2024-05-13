@@ -15,6 +15,11 @@ public class BackgroundImagePanel extends JPanel
 {
     private Image background;
 
+    /**
+     * The constructor of the BackgroundImagePanel class.
+     * It creates a JPanel with a background image.
+     * @param imagePath The path of the image file
+     */
     public BackgroundImagePanel(String imagePath)
     {
         try {
@@ -25,7 +30,10 @@ public class BackgroundImagePanel extends JPanel
         setLayout(new BorderLayout());
     }
     
-    // Paint the background image
+    /**
+     * The paintComponent method is overridden to draw the background image.
+     * @param g The Graphics object
+     */
     @Override
     protected void paintComponent(Graphics g)
     {

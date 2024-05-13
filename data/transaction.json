@@ -54,5 +54,33 @@
 		"transactionDescription":"Withdrawal",
 		"transactionTime":"2024-05-06 19:24:23",
 		"transactionId":"8"
+	},
+	{
+		"transactionMemberName":"3",
+		"transactionAmount":500,
+		"transactionDescription":"Withdrawal",
+		"transactionTime":"2024-05-09 11:34:31",
+		"transactionId":"9"
+	},
+	{
+		"transactionMemberName":"3",
+		"transactionAmount":800,
+		"transactionDescription":"Task reward",
+		"transactionTime":"2024-05-09 11:35:31",
+		"transactionId":"10"
+	},
+	{
+		"transactionMemberName":"2",
+		"transactionAmount":-50,
+		"transactionDescription":"Spend of set task (newtask)",
+		"transactionTime":"2024-05-09 11:37:08",
+		"transactionId":"11"
+	},
+	{
+		"transactionMemberName":"3",
+		"transactionAmount":700,
+		"transactionDescription":"Task reward",
+		"transactionTime":"2024-05-13 17:25:52",
+		"transactionId":"12"
 	}
 ]

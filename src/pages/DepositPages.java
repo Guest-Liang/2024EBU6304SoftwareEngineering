@@ -52,14 +52,10 @@ public class DepositPages extends JPanel {
             }
         };
 
-        table.getColumnModel().getColumn(0).setPreferredWidth(50);
-        table.getColumnModel().getColumn(1).setPreferredWidth(150);
-        table.getColumnModel().getColumn(2).setPreferredWidth(70);
-        table.getColumnModel().getColumn(3).setPreferredWidth(150);
-        table.getColumnModel().getColumn(4).setPreferredWidth(150);
-        table.getColumnModel().getColumn(5).setPreferredWidth(50);
-        table.getColumnModel().getColumn(6).setPreferredWidth(100);
-        table.getColumnModel().getColumn(7).setPreferredWidth(100);
+        int[] columnWidths = {50, 150, 70, 150, 150, 50, 100, 100};
+        for (int i = 0; i < columnWidths.length; i++) {
+            table.getColumnModel().getColumn(i).setPreferredWidth(columnWidths[i]);
+        }
         table.getTableHeader().setReorderingAllowed(false); // Disable column reordering
         table.setFillsViewportHeight(false); // Disable auto resizing
         table.setPreferredScrollableViewportSize(new Dimension(800, 250));
@@ -104,51 +100,78 @@ public class DepositPages extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                // Update the taskData array with the new values from the table
-                for (int i = 0; i < table.getRowCount(); i++) {
-                    JSONObject task = taskData.getJSONObject(i);
-                    if (!task.getBoolean("taskFinished")) {
-                        if ((Boolean) table.getValueAt(i, 2) == true) {
-                            // Update the task with the new values from the table
-                            JSONObject currentUser = UserSession.getInstance().getCurrentUser();
-                            JSONObject accountType = currentUser.getJSONObject("accountType");
-                            task.put("taskHandleTime", Tools.getCurrentTime());
-                            task.put("taskFinished", true);
-                            task.put("taskHandler", currentUser.getString("username"));
-                            accountType.put("current", accountType.getInteger("current") + task.getInteger("taskPay"));
-                            currentUser.put("accountType", accountType);
-                            UserSession.getInstance().setCurrentUser(currentUser);
-                            Tools.SaveCU2CI();
-
-                            
-                            // Add transaction record
-                            JSONArray transaction = UserSession.getInstance().getCurrentTransaction();
-                            Transaction newTransaction = new Transaction();
-                            newTransaction.setTransactionId(String.valueOf(transaction.size() + 1));
-                            newTransaction.setTransactionTime(Tools.getCurrentTime());
-                            newTransaction.setTransactionAmount(task.getInteger("taskPay"));
-                            newTransaction.setTransactionDescription("Task reward");
-                            newTransaction.setTransactionMemberName(currentUser.getString("username"));
-                            transaction.add(Transaction.TransactionData2Json(newTransaction));
-                            UserSession.getInstance().setCurrentTransaction(transaction);
-                        }
+                JSONObject CU = UserSession.getInstance().getCurrentUser();
+                JSONArray CI = UserSession.getInstance().getCurrentInfo();
+                String relativesPwd = "";
+                int flag = 0;
+                for (int i = 0; i < CI.size(); i++)
+                {
+                    JSONObject userJson = CI.getJSONObject(i);
+                    if (userJson.getString("username").equals(CU.getString("relatives")))
+                    {
+                        relativesPwd = userJson.getString("password");
+                        flag = 1;
+                        break;
                     }
-                    else { continue; }
                 }
-                UserSession.getInstance().setCurrentTask(taskData);
-                // Write the updated taskData array back to the file
-                Tools.SaveTaskInfo();
-                Tools.SaveUserInfo();
-                Tools.SaveTransactionInfo();
+                if (flag == 0)
+                {
+                    JOptionPane.showMessageDialog(null, "The relative does not exist.");
+                    return;
+                }  
+                while (true) {
+                    String input = JOptionPane.showInputDialog("Please enter the password of your realatives");
+                    if (input == null) { return; } // User clicked the cancel button
+                    if (input.equals(relativesPwd)) { 
+                        // Update the taskData array with the new values from the table
+                        for (int i = 0; i < table.getRowCount(); i++) {
+                            JSONObject task = taskData.getJSONObject(i);
+                            if (!task.getBoolean("taskFinished")) {
+                                if ((Boolean) table.getValueAt(i, 2) == true) {
+                                    // Update the task with the new values from the table
+                                    JSONObject currentUser = UserSession.getInstance().getCurrentUser();
+                                    JSONObject accountType = currentUser.getJSONObject("accountType");
+                                    task.put("taskHandleTime", Tools.getCurrentTime());
+                                    task.put("taskFinished", true);
+                                    task.put("taskHandler", currentUser.getString("username"));
+                                    accountType.put("current", accountType.getInteger("current") + task.getInteger("taskPay"));
+                                    currentUser.put("accountType", accountType);
+                                    UserSession.getInstance().setCurrentUser(currentUser);
+                                    Tools.SaveCU2CI();
 
-                // Update the table model with the new data
-                Object[][] data=TaskDatatoTable(taskData, columnNames);
-                DefaultTableModel model = (DefaultTableModel) table.getModel();
-                model.setRowCount(0); // Clear the current rows
-                for (Object[] row : data) {
-                    model.addRow(row);
+                                    
+                                    // Add transaction record
+                                    JSONArray transaction = UserSession.getInstance().getCurrentTransaction();
+                                    Transaction newTransaction = new Transaction();
+                                    newTransaction.setTransactionId(String.valueOf(transaction.size() + 1));
+                                    newTransaction.setTransactionTime(Tools.getCurrentTime());
+                                    newTransaction.setTransactionAmount(task.getInteger("taskPay"));
+                                    newTransaction.setTransactionDescription("Task reward");
+                                    newTransaction.setTransactionMemberName(currentUser.getString("username"));
+                                    transaction.add(Transaction.TransactionData2Json(newTransaction));
+                                    UserSession.getInstance().setCurrentTransaction(transaction);
+                                }
+                            }
+                            else { continue; }
+                        }
+                        UserSession.getInstance().setCurrentTask(taskData);
+                        // Write the updated taskData array back to the file
+                        Tools.SaveTaskInfo();
+                        Tools.SaveUserInfo();
+                        Tools.SaveTransactionInfo();
+        
+                        // Update the table model with the new data
+                        Object[][] data=TaskDatatoTable(taskData, columnNames);
+                        DefaultTableModel model = (DefaultTableModel) table.getModel();
+                        model.setRowCount(0); // Clear the current rows
+                        for (Object[] row : data) {
+                            model.addRow(row);
+                        }
+                        table.repaint();
+                        break;
+                    }
+                    else { JOptionPane.showMessageDialog(null, "The password is incorrect."); }
                 }
-                table.repaint();
             }
         });
 

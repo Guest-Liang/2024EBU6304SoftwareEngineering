@@ -12,6 +12,7 @@ import components.*;
  * Title : ChildPages.java
  * Description:
  * The class provides a panel for the child user to choose an item.
+ * It includes options to display the balance, saving goal, withdrawal, transaction, deposit, and exit.
  */
 public class ChildPages extends JPanel {
     private JButton btnShowBalance;
@@ -21,6 +22,11 @@ public class ChildPages extends JPanel {
     private JButton btnDeposit;
     private JButton btnExit;
 
+    /**
+     * ChildPages constructor, initializes the panel layout and buttons.
+     * The panel uses BorderLayout layout, the center part is a panel with a background image, using GridBagLayout layout.
+     * Get the current user and account type through UserSession.
+     */
     public ChildPages() {
         setLayout(new BorderLayout());
         BackgroundImagePanel bgPanel = new BackgroundImagePanel("data/bg.jpg");
@@ -56,12 +62,12 @@ public class ChildPages extends JPanel {
         JLabel label = new JLabel("Choose a item");
         Tools.setLabelProperties(label);
         gbc.gridy += 1;
-        gbc.gridwidth = 1;
         bgPanel.add(label, gbc);
     
         btnShowBalance = new JButton("Show Balance");
         btnShowBalance.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridy += 1;
+        gbc.gridwidth = 1;
         bgPanel.add(btnShowBalance, gbc);
     
         btnSavingGoal = new JButton("Saving Goal");
@@ -95,6 +101,9 @@ public class ChildPages extends JPanel {
         gbc.gridx += 1;
         bgPanel.add(btnExit, gbc);
 
+        /**
+         * When the "Show Balance" button is clicked, a dialog box is displayed showing the current account balance.
+         */
         btnShowBalance.addActionListener(new ActionListener()
         {
             @Override
@@ -107,6 +116,9 @@ public class ChildPages extends JPanel {
             }
         });
 
+        /**
+         * When the "Saving Goal" button is clicked, the SavingGoalPages panel is displayed.
+         */
         btnSavingGoal.addActionListener(new ActionListener()
         {
             @Override
@@ -116,6 +128,11 @@ public class ChildPages extends JPanel {
             }
         });
 
+        /**
+         * When the "Withdrawal" button is clicked, a dialog box is displayed to enter the withdrawal amount.
+         * If the withdrawal amount is greater than the current balance, a dialog box is displayed indicating that the balance is insufficient.
+         * If the withdrawal is successful, the current balance is updated and a dialog box is displayed indicating that the withdrawal is successful.
+         */
         btnWithdraw.addActionListener(new ActionListener()
         {
             @Override
@@ -165,6 +182,9 @@ public class ChildPages extends JPanel {
             }
         });
 
+        /**
+         * When the "Deposit" button is clicked, the DepositPages panel is displayed.
+         */
         btnDeposit.addActionListener(new ActionListener()
         {
             @Override
@@ -174,6 +194,9 @@ public class ChildPages extends JPanel {
             }
         });
 
+        /**
+         * When the "Transaction" button is clicked, the TransactionPages panel is displayed.
+         */
         btnTransaction.addActionListener(new ActionListener() 
         {
             @Override

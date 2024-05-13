@@ -14,6 +14,11 @@ import components.*;
  * The class provides a panel for the user to set a task.
  */
 public class SetTaskPages extends JPanel {
+    /**
+     * Constructor of the SetTaskPages class, initializes the panel layout, 
+     * adds a background image, sets the user session, adds various buttons and labels, and adds action listeners to the buttons.
+     * It creates a panel for the user to set a task.
+     */
     public SetTaskPages() {
         setLayout(new BorderLayout());
         BackgroundImagePanel bgPanel = new BackgroundImagePanel("data/bg.jpg");
@@ -79,7 +84,14 @@ public class SetTaskPages extends JPanel {
         gbc.gridwidth = 2;
         bgPanel.add(btnBack, gbc);
 
-
+        /**
+         * When the Save button is clicked, check if the task name and pay are valid,
+         * create a new task object, add the task to the current user's task list,
+         * update the current user's account balance, save the task information,
+         * update the current user's information, create a new transaction object,
+         * add the transaction to the current user's transaction list, save the transaction information,
+         * clear the task name and pay fields, and update the task ID label.
+         */
         btnSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -126,6 +138,12 @@ public class SetTaskPages extends JPanel {
 
     }
 
+    /**
+     * Check if the task name and pay are valid.
+     * @param taskNameField taskname field
+     * @param taskPayField taskpay field
+     * @return true if the task name and pay are valid, false otherwise
+     */
     public static boolean CheckSetTask(JTextField taskNameField, JTextField taskPayField) {
         String taskName = taskNameField.getText();
         String taskPay = taskPayField.getText();

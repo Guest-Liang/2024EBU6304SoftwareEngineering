@@ -13,7 +13,9 @@ import java.nio.file.Files;
  * The Tools class provides methods to set properties of components.
  * Title : Tools.java
  * Description:
- * The class has methods to set properties of components.
+ * This class contains a series of methods that can be used to set properties of various components, such as JLabel, JButton, etc.
+ * These methods can set properties of components such as font, color, background, etc., and can also add event listeners such as click events.
+ * In addition, this class also provides some utility methods, such as reading and writing files, getting the current time, etc.
  */
 public class Tools {
     public static final Font DEFAULT_BUTTON_FONT = new Font("Arial", Font.PLAIN, 20);
@@ -38,6 +40,14 @@ public class Tools {
         setLabelProperties(label, font, foreground, opaque, DEFAULT_BACKGROUND);
     }
 
+    /**
+     * Set the properties of a JLabel component.
+     * @param label JLabel component that needs to be set
+     * @param font Font of the label
+     * @param foreground Foreground color of the label
+     * @param opaque Whether the label is opaque
+     * @param background Background color of the label
+     */
     public static void setLabelProperties(JLabel label, Font font, Color foreground, boolean opaque, Color background) {
         label.setFont(font);
         label.setForeground(foreground);
@@ -46,9 +56,9 @@ public class Tools {
     }
 
     /**
-     * refesh the page
-     * @param newPage
-     * @param container
+     * Refesh the page, add a new page to the container.
+     * @param newPage new page to be added
+     * @param container container to add the new page
      */
     public static void RefreshPages(JPanel newPage, Container container)
     {
@@ -61,7 +71,7 @@ public class Tools {
     /**
      * Create a button that exits the program when clicked.
      * @param void
-     * @return JButton
+     * @return JButton that exits the program when clicked
      */
     public static JButton ExitButton() {
         JButton btnReturn = new JButton("Exit");
@@ -81,9 +91,9 @@ public class Tools {
      * Create a button that returns to the previous page when clicked.
      * Description:
      * This method creates a button that returns to the previous page when clicked.
-     * @param container
-     * @param newPage
-     * @return
+     * @param container container to add the new page
+     * @param newPage new page to be added
+     * @return JButton that returns to the previous page when clicked
      */
     public static JButton BackButton(Container container, JPanel newPage) {
         JButton btnReturn = new JButton("Back");
@@ -100,10 +110,10 @@ public class Tools {
     }
 
     /**
-     * Read data from a file and return it as a JSONArray.
-     * @param filePath
-     * @param jsonArray
-     * @throws IOException
+     * Write JSONArray data to a file.
+     * @param filePath file path
+     * @param jsonArray JSONArray data to be written to the file
+     * @throws IOException if an I/O error occurs when writing to the file
      */
     public static void WriteToFile(String filePath, JSONArray jsonArray) throws IOException {
         String jsonString = JSON.toJSONString(jsonArray, SerializerFeature.PrettyFormat);
@@ -150,8 +160,8 @@ public class Tools {
 
     /**
      * Read data from a file and return it as a JSONArray.
-     * @param filePath
-     * @return
+     * @param filePath file path
+     * @return JSONArray data read from the file
      */
     public static JSONArray ReadFromFile(String filePath) {
         try {
@@ -185,7 +195,7 @@ public class Tools {
     /**
      * Get the current time in the format "yyyy-MM-dd HH:mm:ss".
      * @param void
-     * @return String
+     * @return String current time in the format "yyyy-MM-dd HH:mm:ss"
      */
     public static String getCurrentTime() {
         return new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date());
