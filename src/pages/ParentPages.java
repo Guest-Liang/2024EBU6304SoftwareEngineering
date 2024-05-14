@@ -31,13 +31,14 @@ public class ParentPages extends JPanel {
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10); // Sets the spacing between components
+        gbc.anchor = GridBagConstraints.CENTER;
 
         JLabel lblTitle = new JLabel("Parent Pages");
         Tools.setLabelProperties(lblTitle);
         lblTitle.setFont(Tools.DEFAULT_TITLE_FONT);
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.gridwidth = 4;
+        gbc.gridwidth = 5;
         bgPanel.add(lblTitle, gbc);
 
         String Intro = "<html>Some Tips:"
@@ -73,6 +74,11 @@ public class ParentPages extends JPanel {
         btnTransaction.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx += 1;
         bgPanel.add(btnTransaction, gbc);
+
+        JButton btnChangeSaving = new JButton("Change Saving");
+        btnChangeSaving.setFont(Tools.DEFAULT_BUTTON_FONT);
+        gbc.gridx += 1;
+        bgPanel.add(btnChangeSaving, gbc);
 
         JButton btnBack = Tools.BackButton(this, new LoginWindow());
         btnBack.setFont(Tools.DEFAULT_BUTTON_FONT);
@@ -166,6 +172,17 @@ public class ParentPages extends JPanel {
 
             }
         });
+
+        /**
+         * When the "Change Saving" button is clicked, the ChangeSavingPages panel is displayed.
+         */
+        btnChangeSaving.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Tools.RefreshPages(new ChangeSavingPages(), getParent());
+            }
+        });
+
 
     }
 }

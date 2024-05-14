@@ -38,6 +38,7 @@ public class LoginWindow extends JPanel {
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(4, 4, 4, 4); // Sets the spacing between components
+        gbc.anchor = GridBagConstraints.CENTER;
 
         JLabel lblTitle = new JLabel("Welcome using ChildBank");
         Tools.setLabelProperties(lblTitle);

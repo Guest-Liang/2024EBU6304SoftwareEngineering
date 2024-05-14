@@ -3,6 +3,8 @@ package pages;
 import javax.swing.*;
 import com.alibaba.fastjson.*;
 import java.awt.*;
+import java.io.IOException;
+
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
@@ -58,6 +60,7 @@ public class TransactionPages extends JPanel {
             table.getColumnModel().getColumn(i).setResizable(false);
         }
         GridBagConstraints gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.CENTER;
 
         JLabel lblTitle = new JLabel("Transaction Pages");
         Tools.setLabelProperties(lblTitle);

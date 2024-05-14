@@ -65,6 +65,7 @@ public class DepositPages extends JPanel {
         }
 
         GridBagConstraints gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.CENTER;
         JLabel lblTitle = new JLabel("Deposit Page");
         Tools.setLabelProperties(lblTitle);
         lblTitle.setFont(Tools.DEFAULT_TITLE_FONT);

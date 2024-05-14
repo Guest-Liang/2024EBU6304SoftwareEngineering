@@ -35,6 +35,7 @@ public class ChildPages extends JPanel {
     
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10); // Sets the spacing between components
+        gbc.anchor = GridBagConstraints.CENTER;
 
         JSONObject CU = UserSession.getInstance().getCurrentUser();
         JSONObject AT = CU.getJSONObject("accountType");
@@ -90,9 +91,14 @@ public class ChildPages extends JPanel {
         gbc.gridx += 1;
         bgPanel.add(btnTransaction, gbc);
 
+        JButton btnChangeSaving = new JButton("Change Saving");
+        btnChangeSaving.setFont(Tools.DEFAULT_BUTTON_FONT);
+        gbc.gridx = 0;
+        gbc.gridy += 1;
+        bgPanel.add(btnChangeSaving, gbc);
+
         JButton btnBack = Tools.BackButton(this, new LoginWindow());
         btnBack.setFont(Tools.DEFAULT_BUTTON_FONT);
-        gbc.gridx = 0;
         gbc.gridy += 1;
         bgPanel.add(btnBack, gbc);
         
@@ -204,5 +210,16 @@ public class ChildPages extends JPanel {
                 Tools.RefreshPages(new TransactionPages(), getParent());
             }
         });
+
+        /**
+         * When the "Change Saving" button is clicked, the ChangeSavingPages panel is displayed.
+         */
+        btnChangeSaving.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Tools.RefreshPages(new ChangeSavingPages(), getParent());
+            }
+        });
+
     }
 }

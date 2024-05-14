@@ -30,6 +30,7 @@ public class SetTaskPages extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10); // Sets the spacing between components
         gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.CENTER;
 
         JLabel lblTitle = new JLabel("Setting Task Page");
         Tools.setLabelProperties(lblTitle);
