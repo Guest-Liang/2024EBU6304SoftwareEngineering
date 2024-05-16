@@ -60,7 +60,7 @@ public class ChildPages extends JPanel {
         gbc.gridy += 1;
         bgPanel.add(lblDescription, gbc);
 
-        JLabel label = new JLabel("Choose a item");
+        JLabel label = new JLabel("Choose an item");
         Tools.setLabelProperties(label);
         gbc.gridy += 1;
         bgPanel.add(label, gbc);
