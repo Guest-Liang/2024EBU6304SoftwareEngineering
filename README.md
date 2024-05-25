@@ -1,12 +1,15 @@
-## GuestLiang’s coding time: [![wakatime](https://wakatime.com/badge/user/0985cb7f-21b8-4ea5-86a4-5e6ba93cb575/project/018ece31-86b2-4427-922b-0c02f2d86060.svg)](https://wakatime.com/)
+# Description
+Childbank is a simulated banking application that we developed for children and their parents to record account passwords and provide the child or parent with functions such as checking, withdrawing money and completing transactions.
 
-## 使用方法
-git clone 整个项目到本地，然后在ChildBank文件夹下执行   
-```java
-java -cp childBank.jar Main
-```
-我使用的java版本是   
-```
+# Software Architecture
+This software is written in Java language , generated in the Java environment can be run in the jar package for the convenience of users . The graphical interface is built using Java Swing.
+
+# Installation
+
+The application needs to run in java environment, please make sure your java version is openjdk-21. Lower versions of jdk are untested and the software may not run properly. If you don't have Java environment please go to [https://www.oracle.com/java/technologies/downloads/#java21](https://www.oracle.com/java/technologies/downloads/#java21) to download and install it.
+
+develop environment:
+```powershell
 java --version
 
 Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
@@ -15,10 +18,13 @@ Java(TM) SE Runtime Environment (build 21+35-LTS-2513)
 Java HotSpot(TM) 64-Bit Server VM (build 21+35-LTS-2513, mixed mode, sharing)
 ```
 
-## 数据
-数据存储在data文件夹下，后缀copy是备份，建议不动   
-task和user以json格式存储   
+# Instructions
+## Run in the graphical interface
+Open a terminal, enter the directory of this README.md, and run   
+```powershell
+java -cp childBank.jar Main
+```
 
-## 进度
-基本完成child页面，使用user里的child账户(isParent=false)登录可以进行操作   
-基本完成parent页面，使用user里的parent账户(isParent=true)登录可以查看余额，发布任务   
+## If you have vscode environment:
+Open the project in vscode, and run the `Main.java` file in the src folder.   
+Use `run java`, do not use `run code`. Or simply just press `F5` key to run the program.
