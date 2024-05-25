@@ -62,7 +62,12 @@ public class ChangeSavingPages extends JPanel{
         gbc.gridx += 1;
         bgPanel.add(toCurrentButton, gbc);
 
-        JButton reButton = Tools.BackButton(this, new ChildPages());
+        JButton reButton;
+        if (CU.getBoolean("isParent")) {
+            reButton = Tools.BackButton(this, new ParentPages());
+        } else {
+            reButton = Tools.BackButton(this, new ChildPages());
+        }
         reButton.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridy += 1;
         gbc.gridx = 0;
