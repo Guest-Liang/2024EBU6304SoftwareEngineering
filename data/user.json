@@ -25,10 +25,10 @@
 		"password":"3",
 		"isParent":false,
 		"accountType":{
-			"saving":30000,
-			"current":9000
+			"saving":29000,
+			"current":10000
 		},
-		"SavingGoals":6000,
+		"SavingGoals":60000,
 		"relatives":"2",
 		"username":"3"
 	},
@@ -36,8 +36,8 @@
 		"password":"2",
 		"isParent":true,
 		"accountType":{
-			"saving":20000,
-			"current":8950
+			"saving":18000,
+			"current":10750
 		},
 		"SavingGoals":5000,
 		"relatives":"3",

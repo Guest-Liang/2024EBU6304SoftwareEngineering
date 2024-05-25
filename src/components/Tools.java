@@ -18,24 +18,61 @@ import java.nio.file.Files;
  * In addition, this class also provides some utility methods, such as reading and writing files, getting the current time, etc.
  */
 public class Tools {
+    /**
+     * Default button font for components.
+     */
     public static final Font DEFAULT_BUTTON_FONT = new Font("Arial", Font.PLAIN, 20);
+    /**
+     * Default title font for components.
+     */
     public static final Font DEFAULT_TITLE_FONT = new Font("Arial", Font.PLAIN, 40);
+    /**
+     * Default foreground color for components.
+     */
     public static final Color DEFAULT_FOREGROUND = Color.WHITE;
+    /**
+     * Default opaque property for components.
+     */
     public static final boolean DEFAULT_OPAQUE = true;
+    /**
+     * Default background color for components.
+     */
     public static final Color DEFAULT_BACKGROUND = new Color(0, 0, 0, 64);
 
+    /**
+     * Set the properties of a JButton component.
+     * @param label JLabel component that needs to be set
+     */
     public static void setLabelProperties(JLabel label) {
         setLabelProperties(label, DEFAULT_BUTTON_FONT, DEFAULT_FOREGROUND, DEFAULT_OPAQUE, DEFAULT_BACKGROUND);
     }
 
+    /**
+     * Set the properties of a JButton component.
+     * @param label JLabel component that needs to be set
+     * @param font Font of the button
+     */
     public static void setLabelProperties(JLabel label, Font font) {
         setLabelProperties(label, font, DEFAULT_FOREGROUND, DEFAULT_OPAQUE, DEFAULT_BACKGROUND);
     }
 
+    /**
+     * Set the properties of a JButton component.
+     * @param label JLabel component that needs to be set
+     * @param font Font of the button
+     * @param foreground Foreground color of the button
+     */
     public static void setLabelProperties(JLabel label, Font font, Color foreground) {
         setLabelProperties(label, font, foreground, DEFAULT_OPAQUE, DEFAULT_BACKGROUND);
     }
 
+    /**
+     * Set the properties of a JButton component.
+     * @param label JLabel component that needs to be set
+     * @param font Font of the button
+     * @param foreground Foreground color of the button
+     * @param opaque Whether the button is opaque
+     */
     public static void setLabelProperties(JLabel label, Font font, Color foreground, boolean opaque) {
         setLabelProperties(label, font, foreground, opaque, DEFAULT_BACKGROUND);
     }
@@ -70,7 +107,6 @@ public class Tools {
 
     /**
      * Create a button that exits the program when clicked.
-     * @param void
      * @return JButton that exits the program when clicked
      */
     public static JButton ExitButton() {
@@ -126,8 +162,6 @@ public class Tools {
      * It then writes the updated currentInfo array back to the file.
      * If the write operation is successful, a success message is displayed.
      * If the write operation fails, an error message is displayed and the exception is printed to the console.
-     *
-     * @throws IOException if an I/O error occurs when writing to the file
      */
     public static void SaveUserInfo() {
         JSONArray currentInfo = UserSession.getInstance().getCurrentInfo();
@@ -143,8 +177,6 @@ public class Tools {
     /**
      * Save the current user's information to the current user in the currentInfo array.
      * This method finds the current user in the currentInfo array and replaces it with the updated user information.
-     * @param void
-     * @return void
      */
     public static void SaveCU2CI() {
         JSONArray currentInfo = UserSession.getInstance().getCurrentInfo();
@@ -179,7 +211,6 @@ public class Tools {
      * This method writes the currentTask array to the file.
      * If the write operation is successful, a success message is displayed.
      * If the write operation fails, an error message is displayed and the exception is printed to the console.
-     * @throws IOException if an I/O error occurs when writing to the file
      */
     public static void SaveTaskInfo() {
         JSONArray currentTask = UserSession.getInstance().getCurrentTask();
@@ -194,7 +225,6 @@ public class Tools {
 
     /**
      * Get the current time in the format "yyyy-MM-dd HH:mm:ss".
-     * @param void
      * @return String current time in the format "yyyy-MM-dd HH:mm:ss"
      */
     public static String getCurrentTime() {
@@ -206,7 +236,6 @@ public class Tools {
      * This method writes the currentTransaction array to the file.
      * If the write operation is successful, a success message is displayed.
      * If the write operation fails, an error message is displayed and the exception is printed to the console.
-     * @throws IOException if an I/O error occurs when writing to the file
      */
     public static void SaveTransactionInfo() {
         JSONArray currentTransaction = UserSession.getInstance().getCurrentTransaction();

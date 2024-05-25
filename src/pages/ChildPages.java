@@ -15,13 +15,6 @@ import components.*;
  * It includes options to display the balance, saving goal, withdrawal, transaction, deposit, and exit.
  */
 public class ChildPages extends JPanel {
-    private JButton btnShowBalance;
-    private JButton btnSavingGoal;
-    private JButton btnWithdraw;
-    private JButton btnTransaction;
-    private JButton btnDeposit;
-    private JButton btnExit;
-
     /**
      * ChildPages constructor, initializes the panel layout and buttons.
      * The panel uses BorderLayout layout, the center part is a panel with a background image, using GridBagLayout layout.
@@ -65,28 +58,28 @@ public class ChildPages extends JPanel {
         gbc.gridy += 1;
         bgPanel.add(label, gbc);
     
-        btnShowBalance = new JButton("Show Balance");
+        JButton btnShowBalance = new JButton("Show Balance");
         btnShowBalance.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridy += 1;
         gbc.gridwidth = 1;
         bgPanel.add(btnShowBalance, gbc);
     
-        btnSavingGoal = new JButton("Saving Goal");
+        JButton btnSavingGoal = new JButton("Saving Goal");
         btnSavingGoal.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx += 1;
         bgPanel.add(btnSavingGoal, gbc);
     
-        btnWithdraw = new JButton("Withdrawal");
+        JButton btnWithdraw = new JButton("Withdrawal");
         btnWithdraw.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx += 1;
         bgPanel.add(btnWithdraw, gbc);
     
-        btnDeposit = new JButton("Deposit");
+        JButton btnDeposit = new JButton("Deposit");
         btnDeposit.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx += 1;
         bgPanel.add(btnDeposit, gbc);
 
-        btnTransaction = new JButton("Transaction");
+        JButton btnTransaction = new JButton("Transaction");
         btnTransaction.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx += 1;
         bgPanel.add(btnTransaction, gbc);
@@ -102,7 +95,7 @@ public class ChildPages extends JPanel {
         gbc.gridy += 1;
         bgPanel.add(btnBack, gbc);
         
-        btnExit = Tools.ExitButton();
+        JButton btnExit = Tools.ExitButton();
         btnExit.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx += 1;
         bgPanel.add(btnExit, gbc);

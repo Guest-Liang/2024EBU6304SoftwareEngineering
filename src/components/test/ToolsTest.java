@@ -12,6 +12,9 @@ import com.alibaba.fastjson.*;
 import java.nio.file.*;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * The ToolsTest class contains the unit tests for the Tools class.
+ */
 public class ToolsTest {
 
     /**
@@ -139,7 +142,7 @@ public class ToolsTest {
 
     /**
      * Test the WriteToFile method.
-     * @throws IOException
+     * @throws IOException If an I/O error occurs reading from the stream
      */
     @Test
     public void testWriteToFile() throws IOException {
@@ -161,7 +164,7 @@ public class ToolsTest {
 
     /**
      * Test the SaveUserInfo method.
-     * @throws IOException
+     * @throws IOException If an I/O error occurs reading from the stream
      */
     @Test
     public void testSaveUserInfo() throws IOException {
@@ -225,7 +228,7 @@ public class ToolsTest {
 
     /**
      * Test the ReadFromFile method.
-     * @throws IOException
+     * @throws IOException If an I/O error occurs reading from the stream
      */
     @Test
     public void testReadFromFile() throws IOException {
@@ -248,7 +251,7 @@ public class ToolsTest {
 
     /**
      * Test the ReadUserInfo method.
-     * @throws IOException
+     * @throws IOException If an I/O error occurs reading from the stream
      */
     @Test
     public void testSaveTaskInfo() throws IOException {
@@ -291,7 +294,7 @@ public class ToolsTest {
 
     /**
      * Test the SaveTransactionInfo method.
-     * @throws IOException
+     * @throws IOException If an I/O error occurs reading from the stream
      */
     @Test
     public void testSaveTransactionInfo() throws IOException {

@@ -15,6 +15,14 @@ import components.*;
  * The class provides a panel for the user to deposit money.
  */
 public class DepositPages extends JPanel {
+    /**
+     * The constructor of the DepositPages class.
+     * It creates a panel for the user to deposit money.
+     * The user can view the tasks and mark them as finished to receive the reward.
+     * The user needs to enter the password of the relative to confirm the deposit.
+     * The user can save the changes and return to the child pages.
+     * The user can also exit the program.
+     */
     public DepositPages() {
         setLayout(new BorderLayout());
         BackgroundImagePanel bgPanel = new BackgroundImagePanel("data/bg.jpg");
@@ -180,9 +188,9 @@ public class DepositPages extends JPanel {
 
     /**
      * Convert taskData to a 2D array for the table
-     * @param taskData
-     * @param columnNames
-     * @return
+     * @param taskData The task data
+     * @param columnNames The column names
+     * @return The 2D array for the table
      */
     public static Object[][] TaskDatatoTable(JSONArray taskData, String[] columnNames) {
         // Create data for the table

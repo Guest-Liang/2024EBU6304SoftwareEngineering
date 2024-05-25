@@ -17,8 +17,8 @@ public class ParentPages extends JPanel {
     /**
      * The constructor of the ParentPages class.
      * It creates a panel for the parent to choose an item.
-     * Constructor of the ParentPages class, initializes the panel layout, adds a background image, sets the user session, adds various buttons and labels, and adds action listeners to the buttons.
-     * @param void
+     * Constructor of the ParentPages class, initializes the panel layout, adds a background image,
+     *  sets the user session, adds various buttons and labels, and adds action listeners to the buttons.
      */
     public ParentPages() {
         setLayout(new BorderLayout());

@@ -14,16 +14,9 @@ import components.*;
  * The class provides a panel for the user to register an account.
  */
 public class RegisterPages extends JPanel {
-    private JTextField nameField;
-    private JPasswordField passwordField;
-    private JComboBox<String> accountTypeBox;
-    private JComboBox<String> parentBox;
-
     /**
      * The constructor of the RegisterPages class.
      * It creates a panel for the user to register an account.
-     * @param void
-     * @return void
      */
     public RegisterPages() {
         setLayout(new BorderLayout());
@@ -51,7 +44,7 @@ public class RegisterPages extends JPanel {
         gbc.gridy += 1;
         gbc.gridwidth = 1;
         bgPanel.add(nameLabel, gbc);
-        nameField = new JTextField();
+        JTextField nameField = new JTextField();
         gbc.gridx += 1;
         nameField.setPreferredSize(new Dimension(200, 30));
         bgPanel.add(nameField, gbc);
@@ -62,7 +55,7 @@ public class RegisterPages extends JPanel {
         gbc.gridx = 0;
         gbc.gridy += 1;
         bgPanel.add(passwordLabel, gbc);
-        passwordField = new JPasswordField();
+        JPasswordField passwordField = new JPasswordField();
         passwordField.setPreferredSize(new Dimension(200, 30));
         gbc.gridx += 1;
         bgPanel.add(passwordField, gbc);
@@ -73,7 +66,7 @@ public class RegisterPages extends JPanel {
         gbc.gridy += 1;
         bgPanel.add(parentLabel, gbc);
         String[] parentLabels = {"True", "False"};
-        parentBox = new JComboBox<>(parentLabels);
+        JComboBox<String> parentBox = new JComboBox<>(parentLabels);
         gbc.gridx += 1;
         bgPanel.add(parentBox, gbc);
 
@@ -108,7 +101,7 @@ public class RegisterPages extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                if (CheckRegister(nameField, passwordField, relativesField, accountTypeBox))
+                if (CheckRegister(nameField, passwordField, relativesField))
                 {
                     User usertemp = new User();
                     usertemp.setUsername(nameField.getText());
@@ -146,14 +139,13 @@ public class RegisterPages extends JPanel {
      * Check if the user input is valid for registration.
      * @param nameField username field
      * @param passwordField password field
-     * @param accountTypeBox account type box
-     * @return
+     * @param relativesField relatives field
+     * @return boolean true if the user input is valid, false otherwise
      */
-    public static boolean CheckRegister(JTextField nameField, JPasswordField passwordField, JTextField relativesField, JComboBox<String> accountTypeBox) {
+    public static boolean CheckRegister(JTextField nameField, JPasswordField passwordField, JTextField relativesField) {
         String username = nameField.getText();
         String password = new String(passwordField.getPassword());
         String relatives = relativesField.getText();
-        // String accountType = (String) accountTypeBox.getSelectedItem();
     
         // Check if username is alphanumeric
         if (!username.matches("[A-Za-z0-9]+")) {

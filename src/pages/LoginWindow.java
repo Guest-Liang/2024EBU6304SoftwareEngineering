@@ -2,7 +2,6 @@ package pages;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
 import com.alibaba.fastjson.*;
 import javax.swing.*;
 import java.util.*;
@@ -16,19 +15,10 @@ import components.*;
  * The class provides a panel for the user to login.
  */
 public class LoginWindow extends JPanel {
-    private JLabel lblUsername;
-    private JTextField txtUsername;
-    private JLabel lblPassword;
-    private JPasswordField txtPassword;
-    private JButton btnLogin;
-    private JButton btnRegister;
-
     /**
      * The constructor of the LoginWindow class.
      * It creates a panel for the user to login.
-     * @param void
-     * @throws IOException
-     * @throws JSONException
+     * @throws JSONException if the JSON is invalid
      */
     public LoginWindow() {
         setLayout(new BorderLayout());
@@ -49,9 +39,9 @@ public class LoginWindow extends JPanel {
         bgPanel.add(lblTitle, gbc);
 
         // Create the components
-        lblUsername = new JLabel("Username:");
+        JLabel lblUsername = new JLabel("Username:");
         Tools.setLabelProperties(lblUsername);
-        txtUsername = new JTextField(20);
+        JTextField txtUsername = new JTextField(20);
         txtUsername.setFont(Tools.DEFAULT_BUTTON_FONT);
         txtUsername.setPreferredSize(new Dimension(200, 30));
         gbc.gridwidth = 1;
@@ -60,9 +50,9 @@ public class LoginWindow extends JPanel {
         gbc.gridx += 1;
         bgPanel.add(txtUsername, gbc);
 
-        lblPassword = new JLabel("Password:");
+        JLabel lblPassword = new JLabel("Password:");
         Tools.setLabelProperties(lblPassword);
-        txtPassword = new JPasswordField(20);
+        JPasswordField txtPassword = new JPasswordField(20);
         txtPassword.setFont(Tools.DEFAULT_BUTTON_FONT);
         txtPassword.setPreferredSize(new Dimension(200, 30));
         txtPassword.setEchoChar('*');
@@ -72,7 +62,7 @@ public class LoginWindow extends JPanel {
         gbc.gridx += 1;
         bgPanel.add(txtPassword, gbc);
 
-        btnRegister = new JButton("Register");
+        JButton btnRegister = new JButton("Register");
         btnRegister.setFont(Tools.DEFAULT_BUTTON_FONT);
         gbc.gridx = 0;
         gbc.gridy += 1;
@@ -88,7 +78,7 @@ public class LoginWindow extends JPanel {
             }
         });
 
-        btnLogin = new JButton("Login");
+        JButton btnLogin = new JButton("Login");
         btnLogin.setFont(Tools.DEFAULT_BUTTON_FONT);
         /**
          * When the login button is clicked, the program will check the username and password.

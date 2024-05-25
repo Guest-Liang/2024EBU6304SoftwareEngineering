@@ -13,6 +13,9 @@ import javax.swing.*;
  */
 public class BackgroundImagePanel extends JPanel
 {
+    /**
+     * The background image
+     */
     private Image background;
 
     /**

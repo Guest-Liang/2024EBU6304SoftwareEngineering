@@ -3,7 +3,6 @@ package pages;
 import javax.swing.*;
 import com.alibaba.fastjson.*;
 import java.awt.*;
-import java.io.IOException;
 
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
@@ -21,10 +20,7 @@ public class TransactionPages extends JPanel {
      * Constructor of the TransactionPages class, initializes the panel layout,
      * adds a background image, sets the user session, and adds various buttons and labels.
      * It creates a panel for the user to view transactions.
-     * @param void
-     * @return void
-     * @throws JSONException
-     * @throws IOException
+     * @throws JSONException if the JSON data is invalid
      */
     public TransactionPages(){
         setLayout(new BorderLayout());

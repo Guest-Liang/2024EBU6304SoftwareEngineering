@@ -82,5 +82,33 @@
 		"transactionDescription":"Task reward",
 		"transactionTime":"2024-05-13 17:25:52",
 		"transactionId":"12"
+	},
+	{
+		"transactionMemberName":"2",
+		"transactionAmount":-200,
+		"transactionDescription":"Spend of set task (settaskTest15)",
+		"transactionTime":"2024-05-25 17:12:52",
+		"transactionId":"13"
+	},
+	{
+		"transactionMemberName":"3",
+		"transactionAmount":2000,
+		"transactionDescription":"Withdrawal",
+		"transactionTime":"2024-05-25 17:13:36",
+		"transactionId":"14"
+	},
+	{
+		"transactionMemberName":"3",
+		"transactionAmount":1000,
+		"transactionDescription":"Task reward",
+		"transactionTime":"2024-05-25 17:13:48",
+		"transactionId":"15"
+	},
+	{
+		"transactionMemberName":"3",
+		"transactionAmount":1000,
+		"transactionDescription":"Task reward",
+		"transactionTime":"2024-05-25 17:13:48",
+		"transactionId":"16"
 	}
 ]

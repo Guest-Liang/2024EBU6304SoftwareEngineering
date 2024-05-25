@@ -21,6 +21,12 @@ import java.awt.event.*;
  */
 public class Dialogbox
 {
+    /**
+     * The constructor of the Dialogbox class.
+     * It creates a Dialogbox with a specified title and message.
+     * @param title The title of the dialog box
+     * @param tips The message to be displayed in the dialog box
+     */
     public Dialogbox(String title, String tips)
     {
         Dialog dialog = new Dialog(new Frame(), title, true);

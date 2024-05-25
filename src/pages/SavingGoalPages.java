@@ -17,8 +17,6 @@ public class SavingGoalPages extends JPanel{
     /**
      * The constructor of the SavingGoalPages class.
      * It creates a panel for the user to set a saving goal.
-     * @param void
-     * @return void
      */
     public SavingGoalPages()
     {

@@ -17,8 +17,6 @@ public class ChangeSavingPages extends JPanel{
     /**
      * The constructor of the ChangeSavingPages class.
      * It creates a panel for the user to transfer funds between current and saving accounts.
-     * @param void
-     * @return void
      */
     public ChangeSavingPages() {
         setLayout(new BorderLayout());

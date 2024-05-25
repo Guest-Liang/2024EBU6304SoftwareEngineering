@@ -11,6 +11,12 @@ import components.*;
  * The class provides the main function of the program.
  */
 public class Main {
+    /**
+     * The main function of the program.
+     * It creates a JFrame and adds the LoginWindow to it.
+     * The program reads the user data, task data, and transaction data from the JSON files.
+     * @param args The command line arguments
+     */
     public static void main(String[] args) {
         JFrame frame = new JFrame("Welcome to ChildBank");
         frame.setSize(960,540);

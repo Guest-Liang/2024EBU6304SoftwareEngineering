@@ -28,7 +28,11 @@ public class Task {
 
     String[] columnNames = {"taskName", "taskId", "taskFinished", "taskSetTime", "taskHandleTime" ,"taskPay", "taskSetter", "taskHandler"};
 
-    // Convert task data to a jsonobject format
+    /**
+     * Converts a JSON object to a Task object.
+     * @param task The JSON object representing a task
+     * @return The Task object
+     */
     public static JSONObject TaskData2Json(Task task) {
         JSONObject taskJson = new JSONObject();
         taskJson.put("taskFinished", task.getTaskFinished());
@@ -42,8 +46,23 @@ public class Task {
         return taskJson;
     }
 
+    /**
+     * The constructor of the Task class.
+     */
     public Task() {}
     
+    /**
+     * The constructor of the Task class.
+     * It creates a task with the specified properties.
+     * @param taskFinished The status of the task
+     * @param taskHandleTime The time the task was handled
+     * @param taskSetTime The time the task was set
+     * @param taskName The name of the task
+     * @param taskPay The pay of the task
+     * @param taskId The id of the task
+     * @param taskSetter The setter of the task
+     * @param taskHandler The handler of the task
+     */
     public Task(boolean taskFinished, String taskHandleTime, String taskSetTime, String taskName, int taskPay, String taskId, String taskSetter, String taskHandler) {
         this.taskFinished = taskFinished;
         this.taskHandleTime = taskHandleTime;
@@ -57,66 +76,130 @@ public class Task {
 
     // getters and setters
 
+    /**
+     * Gets the status of the task.
+     * @return The status of the task
+     */
     public boolean getTaskFinished() {
         return taskFinished;
     }
 
+    /**
+     * Sets the status of the task.
+     * @param taskFinished The status of the task
+     */
     public void setTaskFinished(boolean taskFinished) {
         this.taskFinished = taskFinished;
     }
 
+    /**
+     * Gets the time the task was handled.
+     * @return The time the task was handled
+     */
     public String getTaskHandleTime() {
         return taskHandleTime;
     }
 
+    /**
+     * Sets the time the task was handled.
+     * @param taskHandleTime The time the task was handled
+     */
     public void setTaskHandleTime(String taskHandleTime) {
         this.taskHandleTime = taskHandleTime;
     }
 
+    /**
+     * Gets the time the task was set.
+     * @return The time the task was set
+     */
     public String getTaskSetTime() {
         return taskSetTime;
     }
 
+    /**
+     * Sets the time the task was set.
+     * @param taskSetTime The time the task was set
+     */
     public void setTaskSetTime(String taskSetTime) {
         this.taskSetTime = taskSetTime;
     }
 
+    /**
+     * Gets the name of the task.
+     * @return The name of the task
+     */
     public String getTaskName() {
         return taskName;
     }
 
+    /**
+     * Sets the name of the task.
+     * @param taskName The name of the task
+     */
     public void setTaskName(String taskName) {
         this.taskName = taskName;
     }
 
+    /**
+     * Gets the pay of the task.
+     * @return The pay of the task
+     */
     public int getTaskPay() {
         return taskPay;
     }
 
+    /**
+     * Sets the pay of the task.
+     * @param taskPay The pay of the task
+     */
     public void setTaskPay(int taskPay) {
         this.taskPay = taskPay;
     }
 
+    /**
+     * Gets the id of the task.
+     * @return The id of the task
+     */
     public String getTaskId() {
         return taskId;
     }
 
+    /**
+     * Sets the id of the task.
+     * @param taskId The id of the task
+     */
     public void setTaskId(String taskId) {
         this.taskId = taskId;
     }
 
+    /**
+     * Gets the setter of the task.
+     * @return The setter of the task
+     */
     public String getTaskSetter() {
         return taskSetter;
     }
 
+    /**
+     * Sets the setter of the task.
+     * @param taskSetter The setter of the task
+     */
     public void setTaskSetter(String taskSetter) {
         this.taskSetter = taskSetter;
     }
 
+    /**
+     * Gets the handler of the task.
+     * @return The handler of the task
+     */
     public String getTaskHandler() {
         return taskHandler;
     }
 
+    /**
+     * Sets the handler of the task.
+     * @param taskHandler The handler of the task
+     */
     public void setTaskHandler(String taskHandler) {
         this.taskHandler = taskHandler;
     }
